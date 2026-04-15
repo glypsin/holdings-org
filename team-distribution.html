@@ -177,7 +177,7 @@
 <body>
 
 <h1>3D 组织模型 · 员工平面 × 项目Z轴</h1>
-<p class="subtitle">X轴: 12步演化链 · Y轴: 6层级 · Z轴: 项目切片 · 36员工共用平面，每个项目激活不同格子</p>
+<p class="subtitle">X轴: 12步演化链 · Y轴: 6层级 · Z轴: 项目切片 · 44员工共用平面，每个项目激活不同格子</p>
 
 <div class="z-axis-bar">
   <div class="z-axis-label">Z 轴 · 项目切片（按 Holdings 五组织排列）</div>
@@ -284,6 +284,10 @@ const employees = [
   { id:'T-036', name:'Compliance-Injector', type:'tool new', role:'合规文案注入', detail:'自动加 "不构成投资建议" 声明\nYouTube 描述/视频开头/结尾模板\n服务 P06', positions:[['L1',8]] },
   { id:'T-037', name:'YT-Uploader', type:'tool new', role:'YouTube 发布', detail:'YouTube Data API v3\n标题/描述/标签/缩略图/排期\n服务 P06 发布环节', positions:[['L2',9],['L2',10]] },
   { id:'T-038', name:'YT-Analytics', type:'tool new', role:'YouTube 数据回流', detail:'YouTube Analytics API v2\n观看时长/留存/订阅转化/CPM\n服务 P06 ⑪效果环节', positions:[['L2',10],['L2',11]] },
+  { id:'T-039', name:'autoresearch-fta', type:'tool new', role:'⑩ 状态哨兵', detail:'fta_diagnose.py MVP\nlaunchd 每日09:00\n规则集 rules/p04_mvp_v01.yaml (R1/R2/R3)\n输出 failures/{date}.md\n只读不改 · 状态层10 · 观察位\n2026-04-15 上线 P04\n未来扩 P03 加 p03_mvp.yaml', positions:[['L0',2]] },
+  { id:'T-040', name:'ljg-rank', type:'tool new', role:'② 预筛排序(待装)', detail:'fork lijigang/ljg-skills\n秩序层6 · 执行位\n改预筛算法加"可合成性"维度\n装配条件：⑫roundtable 触发改配置\n暂未装', positions:[['L1',1]] },
+  { id:'T-041', name:'ljg-invest', type:'tool new', role:'⑪ 效果读数(待装)', detail:'fork lijigang/ljg-skills\n指标层7+权重层8 · 观察位\n读 GRW/VPV/ENG/SIG/ROI/MON · 判🟢🟡🔴\n装配条件：已发 notes≥10条 + T72h snapshot 齐\n暂未装', positions:[['L2',10],['L2',11]] },
+  { id:'T-042', name:'ljg-roundtable', type:'tool new', role:'⑫ 迭代决议(待装)', detail:'fork lijigang/ljg-skills\n状态层10 · 观察位 → 自动回写\n多角色读状态 · 直接回写topic_queue/prompts/weights\n必带熔断(3轮🔴冻结) + 回滚(git版本化)\n装配条件：⑩跑稳≥2周 · 配置文件结构化\n暂未装', positions:[['L2',11]] },
   { id:'N-001', name:'Tailscale', type:'tool infra new', role:'三机 mesh 网络', detail:'Mac Air M4 · LG · Huawei XPro 三机全装\nWireGuard VPN · MagicDNS · SSH over tailnet\n上线 2026-04-14\n用途：跨机访问 localhost 服务 + 远程运维\nFunnel 暂不启用（安全收益负值）', positions:[['L0',0],['L0',1]] },
   { id:'F-001', name:'ai-hedge-fund', type:'agent new', role:'投资大师 agent 团', detail:'virattt/ai-hedge-fund · GitHub 开源\nBuffett / Munger / Ackman / Wood / Damodaran 等 prompt agent\n定位：memo red-team（挑刺），非决策器\n数据：美股可用，A股/港股数据稀\n招入 2026-04-14 · 待 fork 到 glypsin', positions:[['L3',2],['L3',3]] },
 ];
@@ -396,7 +400,7 @@ const projects = [
   },
   {
     id: 'P04', name: '项目04 · 姐搜夯爆啦', icon: '🔥', color: '#fe2c55',
-    desc: '小红书 · 对标谢小树 · 9格 · ①热搜②预筛③定夺④调研⑤文案⑥封面⑦合成⑧质检⑨发布回流 · ⑩⑪⑫闲置',
+    desc: '小红书 · 对标谢小树 · 12格 · 前半圈①~⑨在跑 · ⑩哨兵✅(4/15) · ⑪⑫②待装',
     org: 'content-flywheel (MCN)',
     inactive: new Set(['T-009','T-020']),
     details: {
@@ -436,6 +440,10 @@ const projects = [
       'T-030': '[②关系=预筛] 语义去重+主题匹配',
       'T-031': '[⑥秩序→⑦指标=配乐] ACE-Step BGM\nlofi/upbeat preset · 短视频背景乐',
       'T-033': '[⑦指标=合成] 叠BGM到成片',
+      'T-039': '[⑩状态=哨兵] fta_diagnose.py MVP\nlaunchd每日09:00 · R1审批超时/R2数据源故障/R3 note_id TODO\n只读不改 · 2026-04-15上线',
+      'T-040': '[②关系=预筛] ljg-rank 改预筛算法(待装)\n秩序层6 · 执行位 · 被⑫触发才上',
+      'T-041': '[⑪效果=读数] ljg-invest KPI判定(待装)\n前置 ≥10 notes + T72h snapshot',
+      'T-042': '[⑫迭代=决议] ljg-roundtable + 熔断+回滚(待装)\n自动回写topic_queue/prompts/weights · 三件一体',
     },
   },
   {
@@ -497,7 +505,7 @@ const projectWorkflow = {
   P01: ['数据源','关联方','ETL系统','三阶段','季度循环','规则秩序','27看板','权重分配','汇合定稿','状态检查','仪表盘','迭代优化'],
   P02: ['投资信号','行业关系','选股系统','尽调体系','飞轮积累','thesis秩序','六维指标','权重进化','系数调参','持仓状态','收益效果','季度迭代'],
   P03: ['主题池','学术检索','飞轮诊断','学术翻译','入库','素材','配音','合成','质检','发布','效果','迭代'],
-  P04: ['热搜','预筛','定夺','调研','文案','封面','合成','质检','发布回流','—','—','—'],
+  P04: ['热搜','预筛','定夺','调研','文案','封面','合成','质检','发布','FTA诊断✅','效果(待ljg-invest)','迭代(待ljg-roundtable)'],
   P05: ['需求','架构','设计','开发','调试','封装','测试','平衡','优化','QA','部署','迭代'],
   P06: ['决策池','决策筛选','定夺','研究补充','脚本','素材','配音','合成','合规审查','发布','效果','迭代'],
 };
@@ -595,7 +603,7 @@ const productCards = {
           </div>
           <div style="font-size:11px;color:#fe2c55;margin:4px 0 2px;">对标：谢小树 · 热搜综艺点评</div>
           <div style="font-size:11px;color:#aaa;margin-bottom:8px;">签名：待定</div>
-          <div class="ac-status">⏳ 待首发 · 半自动 → 维护模式</div>
+          <div class="ac-status">🟡 已发 5 条 · ③清空7条→approved · ⑩哨兵🟢上岗(4/15) · ⑪⑫待装 · weibo:500残留</div>
           <div class="ac-metrics">
             <div class="ac-metric"><div class="label">GRW</div><div class="value" style="color:#555">—</div><div class="target">>5%/周</div></div>
             <div class="ac-metric"><div class="label">VPV</div><div class="value" style="color:#555">—</div><div class="target">>500/条</div></div>
@@ -604,7 +612,8 @@ const productCards = {
             <div class="ac-metric"><div class="label">ROI</div><div class="value" style="color:#555">—</div><div class="target">—</div></div>
             <div class="ac-metric"><div class="label">MON</div><div class="value" style="color:#555">—</div><div class="target">—</div></div>
           </div>
-          <div class="ac-serving">服务工具链：<span>T-027→T-030→T-008/T-025→T-029→T-019→T-021→T-028</span></div>
+          <div class="ac-serving">A主循环：<span>T-027→T-030→(待ljg-rank)→T-008/T-025→T-029→T-019→T-021→T-028</span></div>
+          <div class="ac-serving" style="margin-top:4px;">B副循环：<span>fta_diagnose✅(4/15上线)→(待ljg-invest·≥10notes)→(待ljg-roundtable+熔断回滚)→权重回写</span></div>
         </div>
       </div>
     </div>`,
@@ -662,7 +671,7 @@ const productCards = {
   'all': `
     <div class="account-layer">
       <h2>📊 全部项目产品一览</h2>
-      <div class="al-sub">6个项目 · 3种产品形态（财务系统/投资系统/MCN账号/游戏）· 40员工共用平面</div>
+      <div class="al-sub">6个项目 · 3种产品形态（财务系统/投资系统/MCN账号/游戏）· 44员工共用平面</div>
       <div class="account-cards">
         <div class="account-card" style="border-color:#f59e0b55;flex:0 0 auto;min-width:200px;">
           <div class="ac-header"><span class="ac-id">P01</span><span class="ac-name" style="font-size:13px;">🏛️ 家办财务</span></div>
@@ -686,7 +695,7 @@ const productCards = {
         </div>
         <div class="account-card" style="border-color:#ef444455;flex:0 0 auto;min-width:200px;">
           <div class="ac-header"><span class="ac-id">P06</span><span class="ac-name" style="font-size:13px;">📈 美股投研日记</span></div>
-          <div class="ac-status">⏳ 待启动 · YouTube · 21/40激活</div>
+          <div class="ac-status">⏳ 待启动 · YouTube · 21/44激活</div>
         </div>
       </div>
     </div>`,
@@ -719,7 +728,7 @@ const deviceAlloc = {
     huawei: { role: '发布+运营', primary: ['T-011','T-016','T-019','T-020','T-022'], tasks: '发布到B站 · 排期(工作日20:00) · 评论互动 · 数据回流采集 · Drive同步接收成片' },
   },
   P04: {
-    mac: { role: '主场生产', primary: ['A-001','A-002','A-003','T-001','T-003','T-004','T-005','T-006','T-008','T-010','T-013','T-014','T-023','T-025','T-026','T-027','T-028','T-029','T-030'], tasks: '管线（半自动）：热搜采集→翻译→图文/短视频生成→质检\n复用P03基础设施 · CapCut模板' },
+    mac: { role: '主场生产', primary: ['A-001','A-002','A-003','T-001','T-003','T-004','T-005','T-006','T-008','T-010','T-013','T-014','T-023','T-025','T-026','T-027','T-028','T-029','T-030'], tasks: 'A主循环(半自动)：热搜→ljg-rank预筛→翻译→图文/短视频→质检→发布\nB副循环(自动)：fta_diagnose扫失败→ljg-invest读KPI→ljg-roundtable周复盘→权重回写topic_queue.yaml\n复用P03基础设施 · CapCut模板' },
     lg:  { role: '审阅+确认', primary: ['H-001','T-007','T-018'], tasks: '大屏审阅内容 · 吐槽方向判断 · 品牌定位确认 · 小红书数据看板' },
     huawei: { role: '发布+运营', primary: ['T-011','T-016','T-019','T-021','T-022'], tasks: '发布到小红书 · 排期(周末+午间12:00) · 评论互动 · 数据回流采集 · Drive同步接收内容' },
   },
@@ -769,6 +778,7 @@ const projectStatus = {
     'T-024':'done','T-025':'done','T-026':'done','T-027':'done','T-028':'todo',
     'T-029':'blocked','T-030':'done','T-031':'done','T-032':'blocked','T-033':'done',
     'T-034':'done',
+    'T-039':'done','T-040':'todo','T-041':'todo','T-042':'todo',
   },
   P05: {
     'H-001':'done','A-001':'done','A-002':'done','A-004':'todo',
