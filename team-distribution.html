@@ -124,6 +124,19 @@
   .subx-cell { font-size: 10px; font-weight: 600; text-align: center; padding: 4px 2px; border-radius: 4px; transition: all 0.2s; }
   .subx-cell.active { background: #1a1a2e; }
   .subx-cell.idle { color: #333; }
+  .subx-role-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 2px; }
+  .subx-role-cell { font-size: 9px; font-weight: 700; text-align: center; padding: 3px 2px; border-radius: 4px; letter-spacing: 0.5px; }
+  .subx-role-cell.r-ceo    { background: #2a1540; color: #c084fc; }
+  .subx-role-cell.r-coo    { background: #2a2510; color: #facc15; }
+  .subx-role-cell.r-cpo    { background: #2a1810; color: #fb923c; }
+  .subx-role-cell.r-cto    { background: #0f1a2e; color: #60a5fa; }
+  .subx-role-cell.r-cmo    { background: #0f2a18; color: #4ade80; }
+  .subx-role-cell.r-cio    { background: #1a1a1a; color: #a0a0a0; }
+  .subx-role-cell.r-chro   { background: #1a1a1a; color: #888; }
+  .subx-role-cell.r-cfo    { background: #2a1a0a; color: #f59e0b; }
+  .subx-role-cell.r-board  { background: #2a0a0a; color: #ef4444; }
+  .subx-role-cell.r-andy   { background: #2a0a2a; color: #e879f9; }
+  .subx-role-cell.r-idle   { color: #333; }
   .flywheel-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 4px; }
   .flywheel-cell { font-size: 9px; color: #555; text-align: center; padding: 2px; }
 
@@ -189,6 +202,7 @@
 <div class="main-grid">
 <div class="grid" id="grid"></div>
 <div class="subx-row" id="subx-row"></div>
+<div class="subx-role-row" id="subx-role-row"></div>
 <div class="flywheel-row" id="flywheel-row"></div>
 <div id="account-section"></div>
 <div id="device-section"></div>
@@ -302,18 +316,18 @@ const projects = [
     org: 'family-office',
     active: new Set(['H-001','A-001','A-002','A-005','T-004','T-005','T-007','T-015','T-016','T-017','T-018','N-001']),
     details: {
-      'N-001': '三机 mesh 网络基建\n出差/外出时远程 ping pipeline-runner 状态\nLG 上的 SQLite 月末对账从 Mac 直读',
-      'H-001': '定义财务分析维度和方向\n审批看板设计·确认关联方往来规则\n接收财务异常上报',
-      'A-001': '财务战略讨论·看板升级设计审核\n周报/月报生成·异常翻译上报\n关联方往来规则维护·三阶段pipeline架构',
-      'A-002': 'gen_l2_report.py(9600行)·finalize_items.py\nn8n 19节点pipeline·SQLite导入\nMetabase 27看板352cards 部署维护',
-      'A-005': 'Google Calendar/Gmail 扫描\n日程提取(Andy/Lijuan)·邮件分类',
-      'T-004': '19节点pipeline(手动/每季度1号)\n6路并行ETL→汇合→定稿→SQLite→Metabase刷新',
-      'T-005': 'Metabase(3100)+n8n(5678)+pipeline-runner(9100)\n容器编排基础设施',
-      'T-007': '27看板352cards\n总览层(6)+功能域(7)+专项分析(8)\n家族财务总览/马斯洛/项目预算/饮食六维',
-      'T-015': '版本控制·AI-Second-Brain代码管理',
-      'T-016': 'AI-Second-Brain 数据源同步\nCN/US/GoogleFi 多源数据',
-      'T-017': '开发工具链·pipeline脚本维护',
-      'T-018': '财务核心规则记忆\n关联方往来·消费衍生收入不计收入·三阶段pipeline',
+      'N-001': '[CTO基建] 三机 mesh 网络\n出差/外出远程 ping pipeline-runner 状态\nLG 上的 SQLite 月末对账从 Mac 直读',
+      'H-001': '[CEO] 定义财务分析维度和方向\n审批看板设计·确认关联方往来规则\n接收财务异常上报',
+      'A-001': '[CFO + CPO-分析] 财务战略讨论·看板升级设计审核\n周报/月报生成·异常翻译上报\n关联方往来规则维护·三阶段pipeline架构',
+      'A-002': '[CTO] gen_l2_report.py(9600行)·finalize_items.py\nn8n 19节点pipeline·SQLite导入\nMetabase 27看板352cards 部署维护',
+      'A-005': '[CMO下属 · 情报扫描] Google Calendar/Gmail\n日程提取(Andy/Lijuan)·邮件分类',
+      'T-004': '[COO基建] 19节点pipeline(手动/每季度1号)\n6路并行ETL→汇合→定稿→SQLite→Metabase刷新',
+      'T-005': '[CTO基建] Metabase(3100)+n8n(5678)+pipeline-runner(9100)\n容器编排基础设施',
+      'T-007': '[CFO看板] 27看板352cards\n总览层(6)+功能域(7)+专项分析(8)\n家族财务总览/马斯洛/项目预算/饮食六维',
+      'T-015': '[CTO基建] 版本控制·AI-Second-Brain代码管理',
+      'T-016': '[CTO基建] AI-Second-Brain 数据源同步\nCN/US/GoogleFi 多源数据',
+      'T-017': '[CTO基建] 开发工具链·pipeline脚本维护',
+      'T-018': '[CHRO · 组织记忆] 财务核心规则记忆\n关联方往来·消费衍生收入不计收入·三阶段pipeline',
     },
     posOverrides: {
       'A-001': [['L4',0],['L4',1],['L4',2],['L4',3],['L4',11],['L3',2],['L3',3],['L3',4]],
@@ -327,22 +341,22 @@ const projects = [
     org: 'ai-fund-memos',
     active: new Set(['H-001','A-001','A-002','A-003','A-005','T-004','T-005','T-007','T-015','T-016','T-017','T-018','T-023','T-024','N-001','F-001']),
     details: {
-      'N-001': '三机 mesh · 出差时远程调投资 pipeline\n跨机读 Metabase 投资看板',
-      'F-001': 'memo red-team：写完 thesis 丢给巴菲特/芒格/Ackman 挑刺\n⚠️ 不用于下单决策（5 个 GPT 共享底层偏见）\n美股数据可用，A股/港股等国内标的数据稀\n运行前 fork 到 glypsin',
-      'H-001': '投资thesis定义·选股方向判断\n接收飞轮甩出的新投资信号\n审批大额决策',
-      'A-001': '投资分析·thesis评审·fund memo撰写\n六维评分框架设计·权重进化监控\n异常翻译上报（"这个行业逻辑变了"）',
-      'A-002': '投资数据ETL·SQLite 5张表\nMetabase投资看板(4个)\nn8n季度pipeline·权重自动进化引擎',
-      'A-003': 'fund memo 知识库编译\n历史投资决策→结构化wiki\n理论框架/行业模型/公司分析归档',
-      'A-005': '公司检索(Google Finance/Scholar)\n竞品行业趋势分析·财报数据采集',
-      'T-004': '投资飞轮季度pipeline\n六维评分→历史数据→权重自动进化',
-      'T-005': '容器编排基础设施',
-      'T-007': '投资看板(4个)\n持仓追踪/收益归因/六维雷达/历史回测',
-      'T-015': '版本控制',
-      'T-016': 'fund-memos 文件同步',
-      'T-017': '开发工具链',
-      'T-018': '投资决策记忆·thesis归档·track record\n权重进化历史',
-      'T-023': '深度研究：公司基本面/行业趋势/竞争格局/学术论文',
-      'T-024': '知识库查询：历史fund memo检索·投资模式识别',
+      'N-001': '[CTO基建] 三机 mesh · 出差时远程调投资 pipeline\n跨机读 Metabase 投资看板',
+      'F-001': '[Board 顾问 · red-team] 写完 thesis 丢给巴菲特/芒格/Ackman 挑刺\n⚠️ 不用于下单决策（5 个 GPT 共享底层偏见）\n美股数据可用，A股/港股等国内标的数据稀\n运行前 fork 到 glypsin',
+      'H-001': '[CEO · 投资决策] thesis定义·选股方向判断\n接收飞轮甩出的新投资信号\n审批大额决策',
+      'A-001': '[CIO 投研主管] 投资分析·thesis评审·fund memo撰写\n六维评分框架设计·权重进化监控\n异常翻译上报（"这个行业逻辑变了"）',
+      'A-002': '[CTO] 投资数据ETL·SQLite 5张表\nMetabase投资看板(4个)\nn8n季度pipeline·权重自动进化引擎',
+      'A-003': '[CHRO · 知识归档] fund memo 知识库编译\n历史投资决策→结构化wiki\n理论框架/行业模型/公司分析归档',
+      'A-005': '[CMO下属 · 情报] 公司检索(Google Finance/Scholar)\n竞品行业趋势分析·财报数据采集',
+      'T-004': '[COO基建] 投资飞轮季度pipeline\n六维评分→历史数据→权重自动进化',
+      'T-005': '[CTO基建] 容器编排基础设施',
+      'T-007': '[CFO看板] 投资看板(4个)\n持仓追踪/收益归因/六维雷达/历史回测',
+      'T-015': '[CTO基建] 版本控制',
+      'T-016': '[CTO基建] fund-memos 文件同步',
+      'T-017': '[CTO基建] 开发工具链',
+      'T-018': '[CHRO · 组织记忆] 投资决策记忆·thesis归档·track record\n权重进化历史',
+      'T-023': '[CIO下属 · 研究] 深度研究：公司基本面/行业趋势/竞争格局/学术论文',
+      'T-024': '[CHRO · 知识查询] 历史fund memo检索·投资模式识别',
     },
     posOverrides: {
       'A-001': [['L4',0],['L4',1],['L4',2],['L4',3],['L4',4],['L4',11],['L3',2],['L3',3],['L3',4]],
@@ -357,45 +371,45 @@ const projects = [
     org: 'content-flywheel (MCN)',
     inactive: new Set(['T-012','T-021','T-027','T-030']),
     details: {
-      'H-001': '[③系统=定夺] NPD/学术PUA/制度批判/硕博生存\n判断主题间深层关系·接收[⑫迭代]飞轮甩出物\n唯一人工工序，其余全自动',
-      'A-001': '[⑥秩序=文案] 巫师财经式冷叙事脚本\n学术口吻翻译层·论文引用·降维高密度\n远期→"老头们"暖叙事',
-      'A-002': '[⑦指标→⑨系数] 全链路执行\nffmpeg+edge-tts+Playwright→B站横屏深度视频',
-      'A-003': '[④体系=调研][⑤循环=入库]\n论文摘要/理论框架→知识库永久归档',
-      'A-004': '[⑦指标=素材] 深蓝学术风封面·数据图表\n远期Phase2：AI生成"老头"角色形象',
-      'A-005': '[①主题=热搜] 竞品分析：对标巫师财经选题策略',
-      'T-001': '[全程] 飞轮诊断 S0-S6·跨工序质量信号',
-      'T-002': '[⑫迭代] 回流异常→自动追溯→触发修复',
-      'T-003': '[②关系=预筛][③系统=定夺] 选题状态机 IP-001',
-      'T-004': '[全程] pipeline调度基础设施',
-      'T-005': '[全程] 容器编排基础设施',
-      'T-006': '[⑤循环=入库] 向量检索·学术口吻语义匹配',
-      'T-007': '[⑪效果=发布] B站看板：播放/弹幕/完播率',
-      'T-008': '[⑨系数=合成] 横屏10-15分钟深度视频',
-      'T-009': '[⑧权重=配音] 冷静学术男声/女声·重逻辑',
-      'T-010': '[⑦指标=素材] HTML→学术风PNG幻灯片',
-      'T-011': '[⑪效果=发布] 自动发到B站',
-      'T-012': '[①主题=热搜] 竞品数据：巫师财经等学术号',
-      'T-013': '[⑦指标=素材] 下载外部视频素材',
-      'T-014': '[⑤循环=入库] 转录→文本→知识库',
-      'T-015': '[全程] 版本控制基础设施',
-      'T-016': '[⑪效果=发布] Mac→Huawei GDrive同步',
-      'T-017': '[全程] 管线代码维护',
-      'T-018': '[全程] 品牌定位·对标记忆·战略决策',
-      'T-019': '[⑪效果=发布] B站工作日20:00排期',
-      'T-020': '[⑫迭代=回流] 播放/完播/弹幕→周度绩效',
-      'T-022': '[⑫迭代=回流] 统一指标·跨账号对比',
-      'T-023': '[④体系=调研] DDG+Scholar→论文/理论框架',
-      'T-024': '[⑤循环=入库] 按标签筛选学术材料',
-      'T-025': '[⑨系数=合成] 封面模板：深蓝+冷色',
-      'T-026': '[⑧权重=配音] Phase3：冷静学者·Fish Audio',
-      'T-027': '[①主题=热搜] 知乎学术/B站知识区热门',
-      'T-028': '[⑫迭代=回流] B站评论→选题建议',
-      'T-029': '[⑩状态=质检] 视频指纹+字幕查重',
-      'T-030': '[②关系=预筛] 语义去重+主题匹配',
-      'T-031': '[⑧权重→⑨系数=配乐] ACE-Step BGM\n8 preset · 冒烟✅ · D-001已通过',
-      'T-032': '[⑨系数=合成] 转场点whoosh/click音效',
-      'T-033': '[⑨系数=合成] 叠BGM到成片mp4',
-      'T-034': '[⑧权重=配音后] 音频锚定→回写scene时长',
+      'H-001': '[CEO · ③定夺] NPD/学术PUA/制度批判/硕博生存\n判断主题间深层关系·接收[⑫迭代]飞轮甩出物\n★唯一人工工序★',
+      'A-001': '[CPO · ⑤文案] 巫师财经式冷叙事脚本\n学术口吻翻译层·论文引用·降维高密度\n远期→"老头们"暖叙事',
+      'A-002': '[CTO · ⑥⑦⑨执行] 全链路技术执行\nffmpeg+edge-tts+Playwright→B站横屏深度视频',
+      'A-003': '[CHRO + CPO下属 · ④调研⑤入库] 论文摘要/理论框架→知识库永久归档',
+      'A-004': '[CPO下属 · ⑥封面] 深蓝学术风封面·数据图表\n远期Phase2：AI生成"老头"角色形象',
+      'A-005': '[CMO下属 · ①情报] 竞品分析：对标巫师财经选题策略',
+      'T-001': '[CIO · 全程哨兵] 飞轮诊断 S0-S6·跨工序质量信号',
+      'T-002': '[CIO · ⑫回流] 异常→自动追溯→触发修复(旧FTA)',
+      'T-003': '[COO · ②③] 选题状态机 IP-001',
+      'T-004': '[COO基建] pipeline调度基础设施',
+      'T-005': '[CTO基建] 容器编排基础设施',
+      'T-006': '[CHRO · ⑤入库] 向量检索·学术口吻语义匹配',
+      'T-007': '[CMO · ⑪看板] B站看板：播放/弹幕/完播率',
+      'T-008': '[CTO · ⑦合成] 横屏10-15分钟深度视频',
+      'T-009': '[CPO下属 · ⑤配音] 冷静学术男声/女声·重逻辑',
+      'T-010': '[CTO · ⑥⑦] HTML→学术风PNG幻灯片',
+      'T-011': '[CMO · ⑨发布] 自动发到B站',
+      'T-012': '[CMO下属 · ①情报] 竞品数据：巫师财经等学术号',
+      'T-013': '[CPO下属 · ④调研] 下载外部视频素材',
+      'T-014': '[CHRO · ⑤入库] 转录→文本→知识库',
+      'T-015': '[CTO基建] 版本控制基础设施',
+      'T-016': '[CTO基建] Mac↔Drive 同步',
+      'T-017': '[CTO基建] 管线代码维护',
+      'T-018': '[CHRO · 全程] 品牌定位·对标记忆·战略决策',
+      'T-019': '[COO · ⑨排期] B站工作日20:00',
+      'T-020': '[CMO · ⑪回流] 播放/完播/弹幕→周度绩效',
+      'T-022': '[CMO · ⑪分析] 统一指标·跨账号对比',
+      'T-023': '[CPO下属 · ④调研] DDG+Scholar→论文/理论框架',
+      'T-024': '[CHRO · 知识查询] 按标签筛选学术材料',
+      'T-025': '[CPO下属 · ⑥封面] 模板：深蓝+冷色',
+      'T-026': '[CPO下属 · ⑤配音] Phase3：冷静学者·Fish Audio',
+      'T-027': '[CMO下属 · ①情报] 知乎学术/B站知识区热门',
+      'T-028': '[CMO · ⑪回流] B站评论→选题建议',
+      'T-029': '[CPO · ⑧QA] 视频指纹+字幕查重',
+      'T-030': '[CPO下属 · ②预筛] 语义去重+主题匹配',
+      'T-031': '[CPO下属 · ⑦配乐] ACE-Step BGM\n8 preset · 冒烟✅',
+      'T-032': '[CTO · ⑦合成] 转场点whoosh/click音效',
+      'T-033': '[CTO · ⑦合成] 叠BGM到成片mp4',
+      'T-034': '[CTO · ⑦合成] 音频锚定→回写scene时长',
     },
   },
   {
@@ -404,46 +418,46 @@ const projects = [
     org: 'content-flywheel (MCN)',
     inactive: new Set(['T-009','T-020']),
     details: {
-      'H-001': '[③系统=定夺] 热搜八卦/恋爱红旗/职场吐槽\n判断什么值得吐槽·接收[⑨系数]飞轮甩出物\n唯一人工工序',
-      'A-001': '[⑤循环=文案] 谢小树式综艺吐槽节奏\n姐姐口吻翻译层·金句提炼·热但不低俗',
-      'A-002': '[⑥秩序→⑦指标] 全链路执行\nCapCut+图片生成→竖屏快节奏短图文',
-      'A-003': '[④体系=调研] 提取真实故事/热搜事件/可讨论素材',
-      'A-004': '[⑥秩序=封面] 粉橙综艺风：大字标题+表情贴纸+热色调',
-      'A-005': '[①主题=热搜] 竞品分析：对标谢小树互动策略',
-      'T-001': '[全程] 飞轮诊断 S0-S6·跨工序质量信号',
-      'T-002': '[⑨系数=回流] 异常→自动追溯→触发修复',
-      'T-003': '[②关系=预筛][③系统=定夺] 选题状态机 IP-002',
-      'T-004': '[全程] pipeline调度基础设施',
-      'T-005': '[全程] 容器编排基础设施',
-      'T-006': '[④体系=调研] 检索结果按通俗口吻输出',
-      'T-007': '[⑨系数=回流] 小红书看板：浏览/收藏/分享',
-      'T-008': '[⑦指标=合成] 竖屏1-3分钟短视频',
-      'T-010': '[⑥秩序=封面][⑦指标=合成] HTML→小红书风格图片',
-      'T-011': '[⑨系数=发布] 自动发到小红书',
-      'T-012': '[①主题=热搜] 竞品数据：谢小树等综艺/情感号',
-      'T-013': '[④体系=调研] 下载外部视频素材',
-      'T-014': '[④体系=调研] 转录→文本→素材库',
-      'T-015': '[全程] 版本控制基础设施',
-      'T-016': '[⑨系数=发布] Mac→Huawei GDrive同步',
-      'T-017': '[全程] 管线代码维护',
-      'T-018': '[全程] 品牌定位·对标谢小树·战略决策',
-      'T-019': '[⑨系数=发布] 小红书周末+午间12:00排期',
-      'T-021': '[⑨系数=回流] 浏览/点赞/收藏→周度绩效',
-      'T-022': '[⑨系数=回流] 统一指标·跨账号对比',
-      'T-023': '[④体系=调研] DDG→热搜背景/八卦脉络',
-      'T-024': '[④体系=调研] 按标签筛选通俗素材',
-      'T-025': '[⑥秩序=封面] variety粉橙+大字+表情+热色',
-      'T-026': '[⑤循环=配音] 活泼姐姐音色（如需）',
-      'T-027': '[①主题=热搜] 微博娱乐/小红书趋势/抖音热点',
-      'T-028': '[⑨系数=回流] 小红书评论→情绪共鸣+吐槽热点',
-      'T-029': '[⑧权重=质检] 图片指纹+文案查重',
-      'T-030': '[②关系=预筛] 语义去重+主题匹配',
-      'T-031': '[⑥秩序→⑦指标=配乐] ACE-Step BGM\nlofi/upbeat preset · 短视频背景乐',
-      'T-033': '[⑦指标=合成] 叠BGM到成片',
-      'T-039': '[⑩状态=哨兵] fta_diagnose.py MVP\nlaunchd每日09:00 · R1审批超时/R2数据源故障/R3 note_id TODO\n只读不改 · 2026-04-15上线',
-      'T-040': '[②关系=预筛] ljg-rank 改预筛算法(待装)\n秩序层6 · 执行位 · 被⑫触发才上',
-      'T-041': '[⑪效果=读数] ljg-invest KPI判定(待装)\n前置 ≥10 notes + T72h snapshot',
-      'T-042': '[⑫迭代=决议] ljg-roundtable + 熔断+回滚(待装)\n自动回写topic_queue/prompts/weights · 三件一体',
+      'H-001': '[CEO · ③定夺] 热搜八卦/恋爱红旗/职场吐槽\n判断什么值得吐槽·接收[⑫迭代]飞轮甩出物\n★唯一人工工序★',
+      'A-001': '[CPO · ⑤文案] 谢小树式综艺吐槽节奏\n姐姐口吻翻译层·金句提炼·热但不低俗',
+      'A-002': '[CTO · ⑥⑦合成执行] 全链路技术执行\nCapCut+图片生成→竖屏快节奏短图文',
+      'A-003': '[CPO下属 · ④调研] 提取真实故事/热搜事件/可讨论素材',
+      'A-004': '[CPO下属 · ⑥封面] 粉橙综艺风：大字标题+表情贴纸+热色调',
+      'A-005': '[CMO下属 · ①情报] 竞品分析：对标谢小树互动策略',
+      'T-001': '[CIO · 全程] 飞轮诊断 S0-S6·跨工序质量信号',
+      'T-002': '[CIO · ⑫回流] 异常→自动追溯→触发修复(旧FTA)',
+      'T-003': '[COO · ②③] 选题状态机 IP-002 · 工序调度中枢',
+      'T-004': '[COO基建] pipeline调度基础设施',
+      'T-005': '[CTO基建] 容器编排基础设施',
+      'T-006': '[CPO下属 · ④调研] 检索结果按通俗口吻输出',
+      'T-007': '[CMO · ⑪看板] 小红书看板：浏览/收藏/分享',
+      'T-008': '[CTO · ⑦合成] 竖屏1-3分钟短视频',
+      'T-010': '[CTO · ⑥⑦] HTML→小红书风格图片',
+      'T-011': '[CMO · ⑨发布] 自动发到小红书',
+      'T-012': '[CMO下属 · ①情报] 竞品数据：谢小树等综艺/情感号',
+      'T-013': '[CPO下属 · ④调研] 下载外部视频素材',
+      'T-014': '[CPO下属 · ④调研] 转录→文本→素材库',
+      'T-015': '[CTO基建] 版本控制基础设施',
+      'T-016': '[CTO基建] Mac↔Drive 同步',
+      'T-017': '[CTO基建] 管线代码维护',
+      'T-018': '[CHRO · 全程] 品牌定位·对标谢小树·战略记忆',
+      'T-019': '[COO · ⑨排期] 小红书周末+午间12:00排期',
+      'T-021': '[CMO · ⑪回流] 浏览/点赞/收藏→周度绩效',
+      'T-022': '[CMO · ⑪分析] 统一指标·跨账号对比',
+      'T-023': '[CPO下属 · ④调研] DDG→热搜背景/八卦脉络',
+      'T-024': '[CHRO · 知识查询] 按标签筛选通俗素材',
+      'T-025': '[CPO下属 · ⑥封面] variety粉橙+大字+表情+热色',
+      'T-026': '[CPO下属 · ⑤配音] 活泼姐姐音色（如需）',
+      'T-027': '[CMO下属 · ①情报] 微博娱乐/小红书趋势/抖音热点',
+      'T-028': '[CMO · ⑪分析] 小红书评论→情绪共鸣+吐槽热点',
+      'T-029': '[CPO · ⑧QA] 图片指纹+文案查重',
+      'T-030': '[CPO下属 · ②预筛] 语义去重+主题匹配',
+      'T-031': '[CPO下属 · ⑦配乐] ACE-Step BGM\nlofi/upbeat preset · 短视频背景乐',
+      'T-033': '[CTO · ⑦合成] 叠BGM到成片',
+      'T-039': '[CIO + 内审 · ⑩哨兵] fta_diagnose.py MVP\nlaunchd每日09:00 · R1审批超时/R2数据源故障/R3 note_id TODO\n★观察位 · 只读不改★ · 2026-04-15上线',
+      'T-040': '[CPO下属 · ②预筛] ljg-rank 改预筛算法(待装)\n秩序层6 · 执行位 · 被⑫触发才上',
+      'T-041': '[CMO下属 · ⑪读数] ljg-invest KPI判定(待装)\n观察位 · 前置 ≥10 notes + T72h snapshot',
+      'T-042': '[★MD/Board · ⑫决议] ljg-roundtable + 熔断+回滚(待装)\n自动回写topic_queue/prompts/weights · 三件一体\n★Lijuan让渡后半圈决策权★',
     },
   },
   {
@@ -452,15 +466,15 @@ const projects = [
     org: 'ai-agency-lab',
     active: new Set(['H-001','A-001','A-002','A-004','T-015','T-016','T-017','T-018','N-001']),
     details: {
-      'N-001': 'Andy 多设备测试：手机/平板直连 Mac dev server\nglypsin.github.io 发布后远程访问',
-      'H-001': '教育目标设定：Andy通过卡牌游戏学独立战争\n判断游戏机制方向·接收Andy gameplay反馈\n核心：Andy是Owner，不说"学习"二字',
-      'A-001': '教育实验设计·PRD/SYSTEM_DESIGN/ADR评审\n双循环AI驱动设计框架\n文档管理：PRD/ADR/CODE_REVIEW/TEST_RESULTS',
-      'A-002': 'PWA开发（零外部依赖）·v5 production-ready\n游戏逻辑·前端UI·测试\n部署 glypsin.github.io · gstack /qa /ship /review',
-      'A-004': 'DALL·E 卡牌美术设计（如需）\nAndy口语练习伙伴',
-      'T-015': 'glypsin/Andy_Liberty_CardGame 仓库\nGitHub Pages 部署 → glypsin.github.io',
-      'T-016': '代码/资源跨机器同步',
-      'T-017': '/qa /ship /review /browse\n游戏开发全流程质量保证',
-      'T-018': '游戏设计决策记录·ADR归档\n教育实验参数·Andy-Education-Experiment.md',
+      'N-001': '[CTO基建] Andy 多设备测试：手机/平板直连 Mac dev server\nglypsin.github.io 发布后远程访问',
+      'H-001': '[★0号用户 · Andy = Owner] 教育目标设定：通过卡牌游戏学独立战争\n判断游戏机制方向·接收Andy gameplay反馈\n★Lijuan=产品赞助人（CEO for this project），Andy是0号用户不是学生★',
+      'A-001': '[CPO · 教育实验设计] PRD/SYSTEM_DESIGN/ADR评审\n双循环AI驱动设计框架\n文档管理：PRD/ADR/CODE_REVIEW/TEST_RESULTS',
+      'A-002': '[CTO · 全链路] PWA开发（零外部依赖）·v5 production-ready\n游戏逻辑·前端UI·测试\n部署 glypsin.github.io · gstack /qa /ship /review',
+      'A-004': '[CPO下属 · 美术/陪练] DALL·E 卡牌美术设计（如需）\nAndy口语练习伙伴',
+      'T-015': '[CTO基建] glypsin/Andy_Liberty_CardGame 仓库\nGitHub Pages 部署 → glypsin.github.io',
+      'T-016': '[CTO基建] 代码/资源跨机器同步',
+      'T-017': '[CTO基建] /qa /ship /review /browse\n游戏开发全流程质量保证',
+      'T-018': '[CHRO · 组织记忆] 游戏设计决策记录·ADR归档\n教育实验参数·Andy-Education-Experiment.md',
     },
     posOverrides: {
       'A-001': [['L4',0],['L4',1],['L4',2],['L4',3],['L3',2],['L3',3]],
@@ -473,27 +487,27 @@ const projects = [
     org: 'ai-agency-lab (MCN)',
     active: new Set(['H-001','A-001','A-002','A-003','F-001','T-004','T-005','T-013','T-015','T-017','T-018','T-023','T-026','T-029','T-031','T-033','T-035','T-036','T-037','T-038','N-001']),
     details: {
-      'H-001': '[①决策池 ②筛选 ③定夺] 选题最终拍板\n投资观点把关 · IP 人设定义',
-      'A-001': '[③定夺 ④研究 ⑤脚本] Cowork 战略审阅\n脚本 red-team · 合规方向判断',
-      'A-002': '[⑥素材 ⑧合成 ⑩发布] Terminal Claude Code\n全链路工程 · YouTube 上传 pipeline',
-      'A-003': '[⑦配音] Whisper/edge-tts 配音\n中英文双语选项',
-      'F-001': '[①决策池] ai-hedge-fund 周运行输出\nBuffett/Munger/Ackman/Wood/Damodaran memo\nfork 到 glypsin 后激活',
-      'T-004': '[pipeline] n8n 调度\n周一 ai-hedge-fund 跑 → 周三成片 → 周五发布',
-      'T-005': '[基建] Docker + pipeline-runner',
-      'T-013': '[⑥素材] ffmpeg 视频合成',
-      'T-015': '[版本] GitHub · prompts/trade_storyteller.txt 版控',
-      'T-017': '[QA] gstack /review /qa',
-      'T-018': '[记忆] 投资记忆 · IP 人设记忆',
-      'T-023': '[④研究] WebFetch + Claude 研报深度',
-      'T-026': '[⑦配音] edge-tts (起步) / Fish Audio (10条后评估)',
-      'T-029': '[⑨质检] 原创度 + 合规扫描',
-      'T-031': '[⑥素材] ACE-Step 配乐',
-      'T-033': '[⑧合成] ffmpeg 叠 BGM',
-      'T-035': '[⑥素材] K线/组合可视化\nmplfinance + plotly',
-      'T-036': '[⑨合规] 自动注入"不构成投资建议"',
-      'T-037': '[⑩发布] YouTube Data API v3',
-      'T-038': '[⑪效果] YouTube Analytics API v2',
-      'N-001': '[基建] Tailscale · LG 远程审阅 Mac pipeline 输出',
+      'H-001': '[CEO · ①②③] 选题最终拍板\n投资观点把关 · IP 人设定义',
+      'A-001': '[CPO · ③④⑤] Cowork 战略审阅\n脚本 red-team · 合规方向判断',
+      'A-002': '[CTO · ⑥⑧⑩] Terminal Claude Code\n全链路工程 · YouTube 上传 pipeline',
+      'A-003': '[CPO下属 · ⑦配音] Whisper/edge-tts\n中英文双语选项',
+      'F-001': '[Board 顾问 · ①决策池] ai-hedge-fund 周运行输出\nBuffett/Munger/Ackman/Wood/Damodaran memo\nfork 到 glypsin 后激活',
+      'T-004': '[COO基建] n8n 调度\n周一 ai-hedge-fund 跑 → 周三成片 → 周五发布',
+      'T-005': '[CTO基建] Docker + pipeline-runner',
+      'T-013': '[CPO下属 · ⑥素材] ffmpeg 视频合成',
+      'T-015': '[CTO基建] GitHub · prompts/trade_storyteller.txt 版控',
+      'T-017': '[CTO基建 · QA] gstack /review /qa',
+      'T-018': '[CHRO · 组织记忆] 投资记忆 · IP 人设记忆',
+      'T-023': '[CPO下属 · ④研究] WebFetch + Claude 研报深度',
+      'T-026': '[CPO下属 · ⑦配音] edge-tts (起步) / Fish Audio (10条后评估)',
+      'T-029': '[CPO · ⑨QA] 原创度 + 合规扫描',
+      'T-031': '[CPO下属 · ⑥配乐] ACE-Step',
+      'T-033': '[CTO · ⑧合成] ffmpeg 叠 BGM',
+      'T-035': '[CPO下属 · ⑥图表] K线/组合可视化\nmplfinance + plotly',
+      'T-036': '[CHRO · ⑨合规] 自动注入"不构成投资建议"',
+      'T-037': '[CMO · ⑩发布] YouTube Data API v3',
+      'T-038': '[CMO · ⑪回流] YouTube Analytics API v2',
+      'N-001': '[CTO基建] Tailscale · LG 远程审阅 Mac pipeline 输出',
     },
   },
 ];
@@ -508,6 +522,16 @@ const projectWorkflow = {
   P04: ['热搜','预筛','定夺','调研','文案','封面','合成','质检','发布','FTA诊断✅','效果(待ljg-invest)','迭代(待ljg-roundtable)'],
   P05: ['需求','架构','设计','开发','调试','封装','测试','平衡','优化','QA','部署','迭代'],
   P06: ['决策池','决策筛选','定夺','研究补充','脚本','素材','配音','合成','合规审查','发布','效果','迭代'],
+};
+
+// 12 工序对应的 C-suite 职位（r-ceo/coo/cpo/cto/cmo/cio/chro/cfo/board/andy）
+const projectRoles = {
+  P01: ['CTO','CHRO','CTO','CTO','COO','CHRO','CFO','CFO','CTO','CIO','CFO','CEO'],
+  P02: ['CMO','CIO','CIO','CPO','CHRO','CIO','CFO','CIO','CTO','BOARD','CFO','CEO'],
+  P03: ['CMO','CPO','CIO','CPO','CHRO','CPO','CPO','CTO','CPO','CMO','CMO','CEO'],
+  P04: ['CMO','CPO','CEO','CPO','CPO','CPO','CTO','CPO','CMO','CIO','CMO','BOARD'],
+  P05: ['ANDY','CPO','CPO','CTO','CTO','CTO','CTO','CPO','CTO','CTO','CMO','ANDY'],
+  P06: ['BOARD','CEO','CEO','CPO','CPO','CPO','CPO','CTO','CHRO','CMO','CMO','CEO'],
 };
 
 // ═══════════════════════════════════════════════
@@ -536,6 +560,16 @@ const productCards = {
             <div class="ac-metric"><div class="label">双管线</div><div class="value" style="color:#c084fc">A+B</div><div class="target">支付级+货品级</div></div>
           </div>
           <div class="ac-serving">核心链路：<span>T-016(数据源)→T-004(n8n 19节点)→A-002(ETL)→T-007(Metabase)</span></div>
+          <div style="margin-top:10px;padding:8px 10px;background:#1f1a0a;border-left:3px solid #f59e0b;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
+            <div style="color:#f59e0b;font-weight:700;margin-bottom:4px;">职位纵贯线（C-suite × 工序）</div>
+            <div><b style="color:#c084fc;">CEO</b> · Lijuan ─ 财务方向 + 异常审批</div>
+            <div><b style="color:#facc15;">COO</b> · n8n 19节点 ─ pipeline 调度</div>
+            <div><b style="color:#fb923c;">CFO</b> · Metabase 27看板 + A-001分析 ─ 看板体系</div>
+            <div><b style="color:#60a5fa;">CTO</b> · Cowork-infra + Docker + gen_l2_report(9600行) ─ ETL+基建</div>
+            <div><b style="color:#4ade80;">CMO下属</b> · Gemini 扫描 ─ Gmail/Calendar 情报</div>
+            <div><b style="color:#a0a0a0;">CIO/内审</b> · ⚠ 尚无哨兵 ─ 未来 fta_diagnose 可扩</div>
+            <div><b style="color:#888;">CHRO</b> · memory/ ─ 关联方规则 + 三阶段pipeline 记忆</div>
+          </div>
         </div>
       </div>
     </div>`,
@@ -561,6 +595,16 @@ const productCards = {
             <div class="ac-metric"><div class="label">Track Record</div><div class="value" style="color:#555">积累中</div><div class="target">—</div></div>
           </div>
           <div class="ac-serving">核心链路：<span>T-023(研究)→A-001(thesis)→A-002(评分引擎)→T-007(投资看板)→T-018(记忆)</span></div>
+          <div style="margin-top:10px;padding:8px 10px;background:#0a1f14;border-left:3px solid #10b981;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
+            <div style="color:#10b981;font-weight:700;margin-bottom:4px;">职位纵贯线（C-suite × 工序）</div>
+            <div><b style="color:#c084fc;">CEO</b> · Lijuan ─ thesis 定义 + 大额决策审批</div>
+            <div><b style="color:#facc15;">COO</b> · n8n 季度 pipeline ─ 飞轮调度</div>
+            <div><b style="color:#fb923c;">CIO</b> · Cowork · 投研主管 ─ 六维评分 + 权重进化</div>
+            <div><b style="color:#60a5fa;">CTO</b> · Code + Metabase + SQLite 5 表 ─ 飞轮引擎</div>
+            <div><b style="color:#4ade80;">CMO下属</b> · Gemini + Perplexity ─ 公司/行业情报</div>
+            <div><b style="color:#ef4444;">Board 顾问</b> · <b>ai-hedge-fund</b> ─ memo red-team（不决策）</div>
+            <div><b style="color:#888;">CHRO</b> · memory/ + A-003 ─ fund memo 知识库 + track record</div>
+          </div>
         </div>
       </div>
     </div>`,
@@ -587,6 +631,16 @@ const productCards = {
             <div class="ac-metric"><div class="label">MON</div><div class="value" style="color:#555">观察期</div><div class="target">—</div></div>
           </div>
           <div class="ac-serving">服务工具链：<span>T-027→T-030→T-023→T-008/T-009/T-010→T-029→T-019→T-020→T-028</span></div>
+          <div style="margin-top:10px;padding:8px 10px;background:#0a1a1f;border-left:3px solid #00a1d6;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
+            <div style="color:#00a1d6;font-weight:700;margin-bottom:4px;">职位纵贯线（C-suite × 工序）</div>
+            <div><b style="color:#c084fc;">CEO</b> · Lijuan ─ ③定夺（唯一人工点）</div>
+            <div><b style="color:#facc15;">COO</b> · topic_queue + n8n ─ ②③调度 + ⑨排期</div>
+            <div><b style="color:#fb923c;">CPO</b> · Cowork+Macropodus+学术文案 ─ ②④⑤⑥⑦⑧</div>
+            <div><b style="color:#60a5fa;">CTO</b> · Code+ffmpeg+Playwright ─ ⑦合成+基建</div>
+            <div><b style="color:#4ade80;">CMO</b> · DailyHotApi+B站API+Plausible ─ ①⑨⑪</div>
+            <div><b style="color:#a0a0a0;">CIO/内审</b> · T-001/T-002 旧 FTA ─ ⑫回流（⑩哨兵未覆盖此 IP）</div>
+            <div><b style="color:#888;">CHRO</b> · memory/+ChromaDB+Dataview ─ 学术知识库（长期资产）</div>
+          </div>
         </div>
       </div>
     </div>`,
@@ -614,6 +668,17 @@ const productCards = {
           </div>
           <div class="ac-serving">A主循环：<span>T-027→T-030→(待ljg-rank)→T-008/T-025→T-029→T-019→T-021→T-028</span></div>
           <div class="ac-serving" style="margin-top:4px;">B副循环：<span>fta_diagnose✅(4/15上线)→(待ljg-invest·≥10notes)→(待ljg-roundtable+熔断回滚)→权重回写</span></div>
+          <div style="margin-top:10px;padding:8px 10px;background:#1a0f1f;border-left:3px solid #fe2c55;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
+            <div style="color:#fe2c55;font-weight:700;margin-bottom:4px;">职位纵贯线（C-suite × 工序）</div>
+            <div><b style="color:#c084fc;">CEO</b> · Lijuan ─ ③定夺（唯一人工点）</div>
+            <div><b style="color:#facc15;">COO</b> · gtask/topic_queue ─ ②③⑨调度</div>
+            <div><b style="color:#fb923c;">CPO</b> · Cowork+ljg-rank+CapCut+QA ─ ②④⑤⑥⑦⑧</div>
+            <div><b style="color:#60a5fa;">CTO</b> · Code+ffmpeg+Docker ─ ⑦合成+全程基建</div>
+            <div><b style="color:#4ade80;">CMO</b> · DailyHotApi+发布+回流 ─ ①⑨⑪</div>
+            <div><b style="color:#a0a0a0;">CIO+内审</b> · <b>autoresearch✅</b> ─ ⑩哨兵（观察位）</div>
+            <div><b style="color:#ef4444;">MD/Board</b> · <b>ljg-roundtable(待装)</b> ─ ⑫迭代决议（自动回写+熔断+回滚）</div>
+            <div><b style="color:#888;">CHRO</b> · memory/+xhs_rules(T-044待装) ─ 知识/规章</div>
+          </div>
         </div>
       </div>
     </div>`,
@@ -639,6 +704,16 @@ const productCards = {
             <div class="ac-metric"><div class="label">用户</div><div class="value" style="color:#c084fc">Andy</div><div class="target">0号用户</div></div>
           </div>
           <div class="ac-serving">核心链路：<span>A-002(Terminal) → T-017(gstack) → T-015(GitHub Pages)</span></div>
+          <div style="margin-top:10px;padding:8px 10px;background:#1a0a1f;border-left:3px solid #c084fc;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
+            <div style="color:#c084fc;font-weight:700;margin-bottom:4px;">职位纵贯线（C-suite × 工序）</div>
+            <div><b style="color:#ef4444;">0号用户 · Andy = Owner</b> ─ gameplay 反馈是最终输入</div>
+            <div><b style="color:#c084fc;">CEO/Sponsor</b> · Lijuan ─ 教育实验方向把关</div>
+            <div><b style="color:#fb923c;">CPO · 教育实验设计</b> · Cowork ─ PRD/ADR/双循环框架</div>
+            <div><b style="color:#60a5fa;">CTO · 全栈</b> · Terminal Code ─ PWA 零依赖 / gstack /ship</div>
+            <div><b style="color:#4ade80;">CMO</b> · GitHub Pages ─ Andy 多设备触达</div>
+            <div><b style="color:#888;">CHRO</b> · memory/+ADR ─ 游戏设计决策记录</div>
+            <div style="color:#666;margin-top:4px;">注：此项目无 ⑩哨兵/⑪⑫ 自动迭代位，靠 Andy 反馈驱动迭代</div>
+          </div>
         </div>
       </div>
     </div>`,
@@ -665,6 +740,17 @@ const productCards = {
             <div class="ac-metric"><div class="label">MON</div><div class="value" style="color:#555">观察期</div><div class="target">—</div></div>
           </div>
           <div class="ac-serving">服务工具链：<span>F-001→T-023→T-035→T-026→T-013→T-033→T-029→T-036→T-037→T-038</span></div>
+          <div style="margin-top:10px;padding:8px 10px;background:#1f0a0a;border-left:3px solid #ef4444;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
+            <div style="color:#ef4444;font-weight:700;margin-bottom:4px;">职位纵贯线（C-suite × 工序）</div>
+            <div><b style="color:#c084fc;">CEO</b> · Lijuan ─ ①②③ 选题拍板 + 合规把关</div>
+            <div><b style="color:#facc15;">COO</b> · n8n 周调度 ─ 周一跑/周三成片/周五发</div>
+            <div><b style="color:#fb923c;">CPO</b> · Cowork+edge-tts+Chart-Gen ─ ④⑤⑥⑦</div>
+            <div><b style="color:#60a5fa;">CTO</b> · Code+ffmpeg+YT-API ─ ⑥⑧⑩ 合成+发布</div>
+            <div><b style="color:#4ade80;">CMO</b> · YT-Uploader+Analytics ─ ⑩发布+⑪效果</div>
+            <div><b style="color:#ef4444;">Board 顾问</b> · <b>ai-hedge-fund</b>（5 agent）─ ①决策池 red-team</div>
+            <div><b style="color:#888;">CHRO</b> · memory/+Compliance-Injector ─ IP 人设 + 合规规章</div>
+            <div style="color:#666;margin-top:4px;">注：⑩哨兵/⑪⑫自动迭代位待 P04 跑稳后复用</div>
+          </div>
         </div>
       </div>
     </div>`,
@@ -974,6 +1060,34 @@ function renderSubX() {
   }
   row.style.display = wf ? 'grid' : 'none';
 }
+function renderSubRole() {
+  const row = document.getElementById('subx-role-row');
+  row.innerHTML = '';
+  const roles = projectRoles[currentProject.id];
+  const label = document.createElement('div');
+  label.className = 'subx-label';
+  label.textContent = roles ? '职位' : '';
+  label.style.color = roles ? '#fff' : '#333';
+  row.appendChild(label);
+  const displayMap = {
+    CEO:'CEO', COO:'COO', CPO:'CPO', CTO:'CTO', CMO:'CMO',
+    CIO:'CIO+审', CHRO:'CHRO', CFO:'CFO',
+    BOARD:'MD/Board', ANDY:'Andy★'
+  };
+  for (let i = 0; i < 12; i++) {
+    const cell = document.createElement('div');
+    const r = roles ? roles[i] : '';
+    if (!r) {
+      cell.className = 'subx-role-cell r-idle';
+      cell.textContent = '';
+    } else {
+      cell.className = `subx-role-cell r-${r.toLowerCase()}`;
+      cell.textContent = displayMap[r] || r;
+    }
+    row.appendChild(cell);
+  }
+  row.style.display = roles ? 'grid' : 'none';
+}
 function renderFlywheel() {
   const fRow = document.getElementById('flywheel-row');
   fRow.innerHTML = '';
@@ -1049,7 +1163,7 @@ function renderDeviceSection() {
 }
 function renderSidebar() {}
 function render() {
-  renderTabs(); renderProjectInfo(); renderGrid(); renderSubX(); renderFlywheel();
+  renderTabs(); renderProjectInfo(); renderGrid(); renderSubX(); renderSubRole(); renderFlywheel();
   renderAccountSection(); renderDeviceSection(); renderSidebar();
   document.getElementById('model-label').textContent = `平面(X×Y) = 12步演化链 × 6层级 · Z = ${currentProject.name}`;
   document.getElementById('model-label').style.color = currentProject.color;
@@ -1084,3 +1198,8 @@ document.addEventListener('mouseout', e => { if (!e.target.closest('.badge')) to
 </script>
 </body>
 </html>
+<!-- daemon test 1776219378 -->
+<!-- FDA test 1776220809 -->
+<!-- FDA retry 1776220974 -->
+<!-- post-reboot test 1776222142 -->
+<!-- fda retest 1776222735 -->
