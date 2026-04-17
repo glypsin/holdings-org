@@ -35,8 +35,7 @@
   .project-info .pi-stat b { color: #fff; }
 
   /* Grid */
-  .main-grid { --col-first: 64px; --col-rest: repeat(12, 1fr); --col-gap: 2px; }
-  .grid { display: grid; grid-template-columns: var(--col-first) var(--col-rest); grid-template-rows: repeat(6, minmax(80px, auto)); gap: var(--col-gap); }
+  .grid { display: grid; grid-template-columns: 64px repeat(12, 1fr); grid-template-rows: repeat(6, minmax(80px, auto)); gap: 2px; }
   .header-cell {
     font-size: 10px; font-weight: 600; color: #aaa; text-align: center;
     padding: 4px 2px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -124,12 +123,12 @@
   .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #aaa; }
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
-  .subx-row { display: grid; grid-template-columns: var(--col-first) var(--col-rest); gap: var(--col-gap); margin-top: 2px; }
+  .subx-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 2px; }
   .subx-label { font-size: 9px; color: #555; text-align: center; display: flex; align-items: center; justify-content: center; }
   .subx-cell { font-size: 10px; font-weight: 600; text-align: center; padding: 4px 2px; border-radius: 4px; transition: all 0.2s; }
   .subx-cell.active { background: #2a2a45; }
   .subx-cell.idle { color: #444; }
-  .subx-role-row { display: grid; grid-template-columns: var(--col-first) var(--col-rest); gap: var(--col-gap); margin-top: 2px; }
+  .subx-role-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 2px; }
   .subx-role-cell { font-size: 9px; font-weight: 700; text-align: center; padding: 3px 2px; border-radius: 4px; letter-spacing: 0.5px; }
   .subx-role-cell.r-ceo    { background: #2a1540; color: #c084fc; }
   .subx-role-cell.r-coo    { background: #2a2510; color: #facc15; }
