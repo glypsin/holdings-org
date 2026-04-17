@@ -585,13 +585,10 @@ const projects = [
     id: 'DEV', name: '开发工具箱 · Skills Map', icon: '🛠️', color: '#a78bfa',
     desc: 'gstack 32 commands (Terminal 🟣) + Cowork 65 skills (桌面端 🔵) = 97 个 AI 工具',
     org: '跨项目复用 · ai-agency-lab',
-    active: new Set(['H-001','A-001','A-002',
+    active: new Set([
       'G-PLN','G-DSN','G-IMP','G-QA','G-DBG','G-2ND','G-DOC','G-SAF',
       'S-ENG','S-DAT','S-OPS','S-MKT','S-FIN','S-BRD','S-PRD','S-DOC','S-ADM']),
     details: {
-      'H-001': '[CEO] 所有 skill 的最终决策者\nL4/L3 的 skill 直接服务 CEO\ngstack /office-hours /plan-ceo-review 面向 CEO',
-      'A-001': '[Cowork 桌面端 🔵] 65 个 skill 的执行端\n9 分类：工程/数据/运营/营销/财务/品牌/效率/文档/管理\n每个 skill 是纯文本指令(SKILL.md)，Cowork 自动路由',
-      'A-002': '[Terminal Claude Code 🟣] 32 个 gstack command 的执行端\n8 集群：规划/设计/交付/质检/诊断/二审/收尾/安全\n每个 command 是 SKILL.md.tmpl 模板 · Terminal 内 /command 调用',
       'G-PLN': '[Terminal 规划 · 6]\n/office-hours — YC 产品诊断\n/plan-ceo-review — CEO 战略审\n/plan-eng-review — 工程架构审\n/plan-design-review — 设计审\n/plan-devex-review — DX 审\n/autoplan — 一键三审',
       'G-DSN': '[Terminal 设计 · 4]\n/design-consultation — 设计系统\n/design-shotgun — 多方案探索\n/design-html — 设计→HTML\n/design-review — 视觉审+修复',
       'G-IMP': '[Terminal 交付 · 3]\n/review — 代码审查\n/ship — 测试+PR\n/land-and-deploy — merge→deploy→canary',
@@ -610,11 +607,7 @@ const projects = [
       'S-DOC': '[Cowork 文档 · 4]\ndocx · xlsx · pptx · pdf',
       'S-ADM': '[Cowork 管理 · 4]\nschedule · setup-cowork\nskill-creator · consolidate-memory',
     },
-    posOverrides: {
-      'H-001': [['L5',0],['L5',1],['L5',11]],
-      'A-001': [['L4',0],['L4',1],['L4',2],['L4',3],['L4',4],['L3',2],['L3',3],['L2',4],['L2',5]],
-      'A-002': [['L1',5],['L1',9],['L0',5],['L0',9]],
-    },
+    posOverrides: {},
   },
 ];
 
@@ -1042,7 +1035,6 @@ const projectStatus = {
     'N-001':'wip',
   },
   DEV: {
-    'H-001':'wip','A-001':'wip','A-002':'wip',
     'G-PLN':'wip','G-DSN':'wip','G-IMP':'wip','G-QA':'wip',
     'G-DBG':'wip','G-2ND':'wip','G-DOC':'wip','G-SAF':'wip',
     'S-ENG':'wip','S-DAT':'wip','S-OPS':'wip','S-MKT':'wip',
