@@ -1203,6 +1203,25 @@ function renderGrid() {
     });
   });
 }
+function renderX1Header() {
+  const row = document.getElementById('x1-header-row');
+  row.innerHTML = '';
+  const label = document.createElement('div');
+  label.className = 'subx-label';
+  label.textContent = '演化链';
+  label.style.color = '#fff';
+  label.style.fontWeight = '700';
+  row.appendChild(label);
+  steps.forEach(s => {
+    const cell = document.createElement('div');
+    cell.className = 'subx-cell active';
+    cell.style.color = '#fff';
+    cell.style.fontWeight = '700';
+    cell.style.fontSize = '12px';
+    cell.innerHTML = `${s.num} ${s.name}`;
+    row.appendChild(cell);
+  });
+}
 function renderSubX() {
   const row = document.getElementById('subx-row');
   row.innerHTML = '';
@@ -1346,7 +1365,7 @@ function renderZStats() {
     </span>`;
 }
 function render() {
-  renderTabs(); renderProjectInfo(); renderGrid(); renderSubX(); renderSubRole(); renderFlywheel();
+  renderTabs(); renderProjectInfo(); renderX1Header(); renderSubX(); renderSubRole(); renderFlywheel(); renderGrid();
   renderAccountSection(); renderDeviceSection(); renderSidebar();
   renderZStats();
   document.getElementById('model-label').textContent = `平面(X×Y) = 12步演化链 × 6层级 · Z = ${currentProject.name}`;
