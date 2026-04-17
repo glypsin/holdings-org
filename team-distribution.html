@@ -35,7 +35,7 @@
   .project-info .pi-stat b { color: #fff; }
 
   /* Grid */
-  .grid { display: grid; grid-template-columns: 64px repeat(12, 1fr); grid-template-rows: auto repeat(6, minmax(80px, auto)); gap: 2px; }
+  .grid { display: grid; grid-template-columns: 64px repeat(12, 1fr); grid-template-rows: repeat(6, minmax(80px, auto)); gap: 2px; }
   .header-cell {
     font-size: 10px; font-weight: 600; color: #aaa; text-align: center;
     padding: 4px 2px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -1139,16 +1139,6 @@ function renderProjectInfo() {
 function renderGrid() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
-  const corner = document.createElement('div');
-  corner.style.cssText = 'font-size:10px;color:#555;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;';
-  corner.textContent = '层级 \\ 步骤';
-  grid.appendChild(corner);
-  steps.forEach(s => {
-    const h = document.createElement('div');
-    h.className = 'header-cell';
-    h.innerHTML = `<span class="step-num">${s.num}</span><span class="step-name">${s.name}</span>`;
-    grid.appendChild(h);
-  });
   const cellMap = {};
   levels.forEach(l => { steps.forEach((_, si) => { cellMap[`${l.id}-${si}`] = []; }); });
   employees.forEach(emp => {
