@@ -656,27 +656,13 @@ const projects = [
     desc: 'gstack 32 commands (Terminal 🟣) + Cowork 65 skills (桌面端 🔵) = 97 个 AI 工具',
     org: '跨项目复用 · ai-agency-lab',
     active: new Set([
-      'G-PLN','G-DSN','G-IMP','G-QA','G-DBG','G-2ND','G-DOC','G-SAF',
-      'S-ENG','S-DAT','S-OPS','S-MKT','S-FIN','S-BRD','S-PRD','S-DOC','S-ADM']),
-    details: {
-      'G-PLN': '[Terminal 规划 · 6]\n/office-hours — YC 产品诊断\n/plan-ceo-review — CEO 战略审\n/plan-eng-review — 工程架构审\n/plan-design-review — 设计审\n/plan-devex-review — DX 审\n/autoplan — 一键三审',
-      'G-DSN': '[Terminal 设计 · 4]\n/design-consultation — 设计系统\n/design-shotgun — 多方案探索\n/design-html — 设计→HTML\n/design-review — 视觉审+修复',
-      'G-IMP': '[Terminal 交付 · 3]\n/review — 代码审查\n/ship — 测试+PR\n/land-and-deploy — merge→deploy→canary',
-      'G-QA': '[Terminal 质检 · 4]\n/qa — 浏览器测试+自动修\n/qa-only — 只报告\n/cso — OWASP+STRIDE 安全审\n/benchmark — 性能回归',
-      'G-DBG': '[Terminal 诊断 · 2]\n/investigate — root cause\n/browse — 截图验证',
-      'G-2ND': '[Terminal 独立审 · 1]\n/codex — 调 OpenAI(非 Claude 自审)\n单 AI 合理化的解药',
-      'G-DOC': '[Terminal 收尾 · 4]\n/document-release — 更新文档\n/retro — 周度复盘\n/learn — 记录教训\n/checkpoint — 保存进度',
-      'G-SAF': '[Terminal 安全 · 8]\n/careful /freeze /guard /unfreeze\n/canary /setup-deploy\n/setup-browser-cookies /gstack-upgrade',
-      'S-ENG': '[Cowork 工程 · 10]\narchitecture · code-review · debug\ndeploy-checklist · documentation\nincident-response · standup\nsystem-design · tech-debt · testing-strategy',
-      'S-DAT': '[Cowork 数据 · 10]\nanalyze · statistical-analysis\ncreate-viz · data-visualization\nbuild-dashboard · explore-data\nvalidate-data · write-query\nsql-queries · data-context-extractor',
-      'S-OPS': '[Cowork 运营 · 9]\nprocess-doc · process-optimization\nrunbook · change-request\ncapacity-plan · compliance-tracking\nrisk-assessment · status-report · vendor-review',
-      'S-MKT': '[Cowork 营销 · 8]\ncampaign-plan · competitive-brief\ncontent-creation · draft-content\nemail-sequence · performance-report\nseo-audit · brand-review',
-      'S-FIN': '[Cowork 财务 · 8]\nfinancial-statements · variance-analysis\njournal-entry · reconciliation\nclose-management · audit-support · sox-testing',
-      'S-BRD': '[Cowork 品牌 · 6]\nbrand-voice-enforcement · guideline-generation\ndiscover-brand · enforce-voice\ngenerate-guidelines · brand-review',
-      'S-PRD': '[Cowork 效率 · 4]\ntask-management · memory-management\nstart · update',
-      'S-DOC': '[Cowork 文档 · 4]\ndocx · xlsx · pptx · pdf',
-      'S-ADM': '[Cowork 管理 · 4]\nschedule · setup-cowork\nskill-creator · consolidate-memory',
-    },
+      'g01','g02','g03','g04','g05','g06','g07','g08','g09','g10','g11','g12','g13','g14','g15','g16',
+      'g17','g18','g19','g20','g21','g22','g23','g24','g25','g26','g27','g28','g29','g30','g31','g32',
+      's01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16',
+      's17','s18','s19','s20','s21','s22','s23','s24','s25','s26','s27','s28','s29','s30','s31','s32',
+      's33','s34','s35','s36','s37','s38','s39','s40','s41','s42','s43','s44','s45','s46','s47','s48',
+      's49','s50','s51','s52','s53','s54','s55','s56','s57','s58','s59','s60','s61','s62','s63']),
+    details: {},
     posOverrides: {},
   },
 ];
@@ -1104,12 +1090,10 @@ const projectStatus = {
     'T-035':'todo','T-036':'todo','T-037':'todo','T-038':'todo',
     'N-001':'wip',
   },
-  DEV: {
-    'G-PLN':'wip','G-DSN':'wip','G-IMP':'wip','G-QA':'wip',
-    'G-DBG':'wip','G-2ND':'wip','G-DOC':'wip','G-SAF':'wip',
-    'S-ENG':'wip','S-DAT':'wip','S-OPS':'wip','S-MKT':'wip',
-    'S-FIN':'wip','S-BRD':'wip','S-PRD':'wip','S-DOC':'wip','S-ADM':'wip',
-  },
+  DEV: Object.fromEntries(
+    [...Array(32)].map((_,i)=>[`g${String(i+1).padStart(2,'0')}`,'wip'])
+    .concat([...Array(63)].map((_,i)=>[`s${String(i+1).padStart(2,'0')}`,'wip']))
+  ),
 };
 
 function getStatus(empId, proj) {
