@@ -1194,7 +1194,10 @@ function renderGrid() {
   grid.innerHTML = '';
   const cellMap = {};
   levels.forEach(l => { steps.forEach((_, si) => { cellMap[`${l.id}-${si}`] = []; }); });
+  const isDEV = currentProject.id === 'DEV';
   employees.forEach(emp => {
+    // DEV 页只显示工具 badge (g01-g32, s01-s63)
+    if (isDEV && !emp.id.match(/^[gs]\d/)) return;
     const positions = getEmpPositions(emp, currentProject);
     const active = isEmpActive(emp, currentProject);
     const status = active ? getStatus(emp.id, currentProject) : null;
