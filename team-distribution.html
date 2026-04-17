@@ -915,7 +915,7 @@ const productCards = {
   'all': `
     <div class="account-layer">
       <h2>📊 全部项目产品一览</h2>
-      <div class="al-sub">6个项目 · 3种产品形态（财务系统/投资系统/MCN账号/游戏）· 44员工共用平面</div>
+      <div class="al-sub">7个页面 · 6项目 + 1工具箱 · 3种产品形态（财务系统/投资系统/MCN账号/游戏）+ 97 AI 工具</div>
       <div class="account-cards">
         <div class="account-card" style="border-color:#f59e0b55;flex:0 0 auto;min-width:200px;">
           <div class="ac-header"><span class="ac-id">P01</span><span class="ac-name" style="font-size:13px;">🏛️ 家办财务</span></div>
@@ -985,6 +985,11 @@ const deviceAlloc = {
     mac: { role: '主场全链路', primary: ['A-002','F-001','T-004','T-005','T-023','T-035','T-037','T-038'], tasks: 'ai-hedge-fund 周度运行 · 投研 memo 生成 · K线可视化 · 视频合成 · YouTube 上传 + Analytics 回流\n全链路单机 Mac Air M4' },
     lg:  { role: '审阅+定夺', primary: ['H-001','A-001','T-018'], tasks: '大屏审阅 memo 和成片 · 选题定夺 · IP 人设把关 · Tailscale→Mac' },
     huawei: { role: '—', primary: [], tasks: '本项目不涉及对外发布（YouTube 直接 Mac 发）' },
+  },
+  DEV: {
+    mac: { role: '全部工具运行', primary: ['A-001','A-002','G-PLN','G-DSN','G-IMP','G-QA','G-DBG','G-2ND','G-DOC','G-SAF','S-ENG','S-DAT','S-OPS','S-MKT','S-FIN','S-BRD','S-PRD','S-DOC','S-ADM'], tasks: 'gstack(Terminal) + Cowork Skills 全在 Mac Air M4\nTerminal: ~/.claude/skills/gstack/ · /command 调用\nCowork: 桌面端插件 · 自动路由' },
+    lg:  { role: '消费+审阅', primary: ['H-001'], tasks: 'CEO 在大屏审阅 skill 输出\n查看 3D 组织模型 · 审批工单' },
+    huawei: { role: '—', primary: [], tasks: '开发工具不在此设备运行' },
   },
 };
 
