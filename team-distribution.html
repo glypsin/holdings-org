@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D 组织模型 · 员工平面 × 项目Z轴 · v20260417</title>
+<title>3D 组织模型 · 员工平面 × 项目Z轴</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #1a1a2e; color: #e8e8f0; padding: 24px; }
+  body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 24px; }
   h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; color: #fff; }
   .subtitle { font-size: 13px; color: #888; margin-bottom: 16px; }
   .container { display: flex; gap: 32px; flex-wrap: wrap; }
@@ -18,15 +18,15 @@
   .project-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .project-tab {
     padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
-    border: 1px solid #444; background: #252540; color: #888; cursor: pointer;
+    border: 1px solid #333; background: #16161e; color: #666; cursor: pointer;
     transition: all 0.2s; white-space: nowrap;
   }
-  .project-tab:hover { border-color: #666; color: #ccc; }
+  .project-tab:hover { border-color: #555; color: #aaa; }
   .project-tab.active { color: #fff; }
 
   .project-info {
     display: none; padding: 10px 16px; border-radius: 8px; margin-bottom: 12px;
-    font-size: 12px; border: 1px solid #444; background: #222240;
+    font-size: 12px; border: 1px solid #333; background: #12121a;
   }
   .project-info.show { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .project-info .pi-name { font-weight: 700; font-size: 14px; }
@@ -35,7 +35,7 @@
   .project-info .pi-stat b { color: #fff; }
 
   /* Grid */
-  .grid { display: grid; grid-template-columns: 64px repeat(12, 1fr); grid-template-rows: repeat(6, minmax(80px, auto)); gap: 2px; }
+  .grid { display: grid; grid-template-columns: 64px repeat(12, 1fr); grid-template-rows: auto repeat(6, minmax(80px, auto)); gap: 2px; }
   .header-cell {
     font-size: 10px; font-weight: 600; color: #aaa; text-align: center;
     padding: 4px 2px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -53,31 +53,26 @@
   .level-label.l1 { background: #2e1a0a; color: #fb923c; }
   .level-label.l0 { background: #1a1a1a; color: #a0a0a0; }
   .cell {
-    border-radius: 6px; padding: 4px; display: flex; flex-wrap: wrap; align-items: flex-start;
-    justify-content: flex-start; gap: 3px; min-height: 48px; cursor: default; transition: all 0.2s;
-    overflow: hidden; min-width: 0;
+    border-radius: 6px; padding: 4px; display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: center; gap: 3px; min-height: 48px; cursor: default; transition: all 0.2s;
   }
   .cell:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 0 12px rgba(255,255,255,0.15); }
-  .cell.empty { background: #1e1e30; }
-  .cell.active { background: #262645; border: 1px solid #444; }
-  .cell.human { background: #3d2a55; border: 1px solid #7c3aed77; }
+  .cell.empty { background: #111118; }
+  .cell.active { background: #16161e; border: 1px solid #333; }
+  .cell.human { background: #2d1a3e; border: 1px solid #7c3aed55; }
 
   .badge {
     font-size: 9px; font-weight: 600; padding: 2px 5px; border-radius: 10px;
     white-space: nowrap; cursor: pointer; transition: all 0.15s; position: relative;
   }
   .badge:hover { transform: scale(1.15); z-index: 20; }
-  .badge.human { background: #7c3aed55; color: #c084fc; font-weight: 600; border: 1px solid #7c3aed44; }
-  .badge.agent { background: #2563eb44; color: #60a5fa; font-weight: 600; border: 1px solid #2563eb44; }
-  .badge.agent.new { background: #05966944; color: #34d399; font-weight: 600; border: 1px solid #05966944; }
-  .badge.agent.pending { background: #6b728044; color: #9ca3af; font-weight: 600; }
-  .badge.tool { background: #d9770644; color: #fbbf24; font-size: 9px; font-weight: 600; border: 1px solid #d9770644; }
-  .badge.tool.infra { background: #4b556344; color: #9ca3af; font-weight: 600; }
-  .badge.tool.new { background: #15803d44; color: #4ade80; font-weight: 600; border: 1px solid #22c55e44; }
-  .badge.gstack { background: #a78bfa; color: #1a1a2e; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; border: 1px solid #c4b5fd; padding: 3px 7px; }
-  .badge.gstack:hover { box-shadow: 0 0 12px #a78bfacc; transform: scale(1.2); }
-  .badge.skill { background: #22d3ee; color: #0a1a2e; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; border: 1px solid #67e8f9; padding: 3px 7px; }
-  .badge.skill:hover { box-shadow: 0 0 12px #22d3eecc; transform: scale(1.2); }
+  .badge.human { background: #7c3aed; color: #fff; }
+  .badge.agent { background: #2563eb; color: #fff; }
+  .badge.agent.new { background: #059669; color: #fff; }
+  .badge.agent.pending { background: #6b7280; color: #fff; }
+  .badge.tool { background: #d97706; color: #fff; font-size: 9px; }
+  .badge.tool.infra { background: #4b5563; color: #ddd; }
+  .badge.tool.new { background: #15803d; color: #fff; border: 1px solid #22c55e; }
   .badge.inactive { opacity: 0.15 !important; filter: grayscale(1); pointer-events: none; }
   /* 三档虚实：done 12% / todo 35% / wip+blocked 100% */
   .badge.st-done-b { opacity: 0.12; }
@@ -92,17 +87,17 @@
   .badge .dtag.lg { background: #4ade8033; color: #4ade80; }
   .badge .dtag.hua { background: #facc1533; color: #facc15; }
   .badge .dtag.multi { background: #c084fc22; color: #c084fc; }
-  .cell.st-done { background: #1e1e2e !important; border-color: #2a2a40 !important; }
-  .cell.st-wip { background: #2a2a1e !important; border-color: #facc1540 !important; }
-  .cell.st-blocked { background: #2e1e1e !important; border-color: #ef444440 !important; }
-  .cell.st-mixed { background: #222238 !important; border-color: #60a5fa30 !important; }
-  .progress-bar { height: 6px; border-radius: 3px; background: #333; margin-top: 4px; overflow: hidden; display: flex; }
+  .cell.st-done { background: #0d0d12 !important; border-color: #16161e !important; }
+  .cell.st-wip { background: #1a1a10 !important; border-color: #facc1530 !important; }
+  .cell.st-blocked { background: #1f1010 !important; border-color: #ef444430 !important; }
+  .cell.st-mixed { background: #14161a !important; border-color: #60a5fa20 !important; }
+  .progress-bar { height: 6px; border-radius: 3px; background: #222; margin-top: 4px; overflow: hidden; display: flex; }
   .progress-bar .pg-done { background: #4ade80; }
   .progress-bar .pg-wip { background: #facc15; }
   .progress-bar .pg-blocked { background: #ef4444; }
 
   .tooltip {
-    display: none; position: fixed; background: #2a2a45; border: 1px solid #555; border-radius: 8px;
+    display: none; position: fixed; background: #1e1e2e; border: 1px solid #444; border-radius: 8px;
     padding: 12px 16px; font-size: 12px; z-index: 100; max-width: 380px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
   }
@@ -113,12 +108,12 @@
   .tooltip .tt-role { color: #aaa; font-size: 11px; margin-bottom: 6px; }
   .tooltip .tt-detail { color: #ccc; font-size: 11px; line-height: 1.5; }
 
-  .stats-card { background: #252540; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .stats-card { background: #16161e; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
   .stats-card h3 { font-size: 13px; color: #888; margin-bottom: 10px; font-weight: 600; }
   .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
   .stat-label { font-size: 12px; color: #aaa; }
   .stat-value { font-size: 14px; font-weight: 700; }
-  .stat-bar { height: 4px; border-radius: 2px; background: #333; margin-top: 2px; }
+  .stat-bar { height: 4px; border-radius: 2px; background: #222; margin-top: 2px; }
   .stat-bar-fill { height: 100%; border-radius: 2px; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #aaa; }
@@ -126,9 +121,9 @@
 
   .subx-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 2px; }
   .subx-label { font-size: 9px; color: #555; text-align: center; display: flex; align-items: center; justify-content: center; }
-  .subx-cell { font-size: 10px; font-weight: 600; text-align: center; padding: 4px 2px; border-radius: 4px; transition: all 0.2s; min-width: 0; overflow: hidden; }
-  .subx-cell.active { background: #2a2a45; }
-  .subx-cell.idle { color: #444; }
+  .subx-cell { font-size: 10px; font-weight: 600; text-align: center; padding: 4px 2px; border-radius: 4px; transition: all 0.2s; }
+  .subx-cell.active { background: #1a1a2e; }
+  .subx-cell.idle { color: #333; }
   .subx-role-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 2px; }
   .subx-role-cell { font-size: 9px; font-weight: 700; text-align: center; padding: 3px 2px; border-radius: 4px; letter-spacing: 0.5px; }
   .subx-role-cell.r-ceo    { background: #2a1540; color: #c084fc; }
@@ -145,13 +140,13 @@
   .flywheel-row { display: grid; grid-template-columns: 64px repeat(12, 1fr); gap: 2px; margin-top: 4px; }
   .flywheel-cell { font-size: 9px; color: #555; text-align: center; padding: 2px; }
 
-  .account-layer { margin-top: 24px; padding: 16px; background: #222240; border-radius: 10px; border: 1px solid #444; }
+  .account-layer { margin-top: 24px; padding: 16px; background: #12121a; border-radius: 10px; border: 1px solid #333; }
   .account-layer h2 { font-size: 15px; color: #fff; margin-bottom: 4px; }
   .account-layer .al-sub { font-size: 11px; color: #888; margin-bottom: 14px; }
   .account-cards { display: flex; gap: 16px; flex-wrap: wrap; }
   .account-card {
-    flex: 1; min-width: 280px; background: #2a2a48; border-radius: 10px; padding: 16px;
-    border: 1px solid #3a3a55; transition: all 0.2s;
+    flex: 1; min-width: 280px; background: #1a1a24; border-radius: 10px; padding: 16px;
+    border: 1px solid #2a2a3a; transition: all 0.2s;
   }
   .account-card:hover { border-color: #555; }
   .ac-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
@@ -160,7 +155,7 @@
   .ac-platform { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
   .ac-status { font-size: 11px; margin-top: 2px; }
   .ac-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
-  .ac-metric { background: #1e1e38; border-radius: 6px; padding: 8px; text-align: center; }
+  .ac-metric { background: #111118; border-radius: 6px; padding: 8px; text-align: center; }
   .ac-metric .label { font-size: 9px; color: #666; }
   .ac-metric .value { font-size: 14px; font-weight: 700; margin-top: 2px; }
   .ac-metric .target { font-size: 9px; color: #555; margin-top: 1px; }
@@ -169,13 +164,13 @@
   .model-label { font-size: 10px; color: #555; text-align: right; margin-top: 8px; letter-spacing: 0.5px; }
 
   /* Device allocation layer */
-  .device-layer { margin-top: 24px; padding: 16px; background: #222240; border-radius: 10px; border: 1px solid #444; }
+  .device-layer { margin-top: 24px; padding: 16px; background: #12121a; border-radius: 10px; border: 1px solid #333; }
   .device-layer h2 { font-size: 15px; color: #fff; margin-bottom: 4px; }
   .device-layer .dl-sub { font-size: 11px; color: #888; margin-bottom: 14px; }
   .device-cards { display: flex; gap: 12px; flex-wrap: wrap; }
   .device-card {
-    flex: 1; min-width: 200px; background: #2a2a48; border-radius: 10px; padding: 14px;
-    border: 1px solid #3a3a55; transition: all 0.2s;
+    flex: 1; min-width: 200px; background: #1a1a24; border-radius: 10px; padding: 14px;
+    border: 1px solid #2a2a3a; transition: all 0.2s;
   }
   .device-card:hover { border-color: #555; }
   .dc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
@@ -186,27 +181,16 @@
   .dc-tasks .dt-tool { color: #d97706; font-weight: 600; }
   .dc-tasks .dt-dim { color: #555; }
   .dc-emplist { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
-  .dc-emplist .de { font-size: 9px; padding: 1px 5px; border-radius: 8px; background: #333; color: #bbb; }
+  .dc-emplist .de { font-size: 9px; padding: 1px 5px; border-radius: 8px; background: #222; color: #aaa; }
   .dc-emplist .de.primary { background: #2563eb33; color: #60a5fa; border: 1px solid #2563eb55; }
   .dc-emplist .de.secondary { background: #f59e0b15; color: #d97706; border: 1px solid #d9770633; }
   .dc-emplist .de.na { background: #111; color: #444; }
-
-  /* z-axis 服务对象 indicator */
-  .z-tag { display:inline-block; font-size:7px; padding:0 3px; border-radius:3px; margin-left:2px; vertical-align:middle; font-weight:700; line-height:14px; }
-  .z-tag.z-人 { background:#22c55e33; color:#4ade80; }
-  .z-tag.z-中间 { background:#eab30833; color:#facc15; }
-  .z-tag.z-系统 { background:#3b82f633; color:#60a5fa; }
-  .z-stats { display:flex; gap:12px; align-items:center; font-size:11px; margin-top:4px; }
-  .z-stats .z-count { padding:2px 8px; border-radius:4px; }
-  .z-stats .z-count.healthy { border:1px solid #22c55e55; color:#4ade80; }
-  .z-stats .z-count.warning { border:1px solid #ef444455; color:#ef4444; }
-
 </style>
 </head>
 <body>
 
 <h1>3D 组织模型 · 员工平面 × 项目Z轴</h1>
-<p class="subtitle">X轴: 12步演化链 · Y轴: 6层级 · Z轴: 项目切片 · 44员工 + 17工具集群 共用平面，每个项目激活不同格子</p>
+<p class="subtitle">X轴: 12步演化链 · Y轴: 6层级 · Z轴: 项目切片 · 44员工共用平面，每个项目激活不同格子</p>
 
 <div class="z-axis-bar">
   <div class="z-axis-label">Z 轴 · 项目切片（按 Holdings 五组织排列）</div>
@@ -216,11 +200,10 @@
 
 <div class="container">
 <div class="main-grid">
-<div class="subx-row" id="x1-header-row"></div>
+<div class="grid" id="grid"></div>
 <div class="subx-row" id="subx-row"></div>
 <div class="subx-role-row" id="subx-role-row"></div>
 <div class="flywheel-row" id="flywheel-row"></div>
-<div class="grid" id="grid"></div>
 <div id="account-section"></div>
 <div id="device-section"></div>
 <div class="model-label" id="model-label"></div>
@@ -255,196 +238,72 @@ const flywheel = ['S0→S1','S1→S2','S2→S3','S3','S3→S4','S4→S5','S4→S
 const employees = [
   { id:'H-001', name:'Lijuan', type:'human', role:'CEO / 主体层',
     detail:'定义主题、判断关系、接收甩出物。唯一的人。\n五个项目共用同一个 L5 决策者',
-    z:'人', positions:[['L5',0],['L5',1],['L5',11]] },
+    positions:[['L5',0],['L5',1],['L5',11]] },
 
   { id:'A-001', name:'Cowork', type:'agent', role:'参谋长 / 翻译层核心',
     detail:'飞轮诊断、观点提炼、架构设计、工单、异常翻译上报。\n翻译层核心——同一认知的不同译本',
-    z:'人', positions:[['L4',0],['L4',1],['L4',2],['L4',3],['L4',4],['L4',11],['L3',2],['L3',3],['L3',4],['L2',5],['L2',6]] },
+    positions:[['L4',0],['L4',1],['L4',2],['L4',3],['L4',4],['L4',11],['L3',2],['L3',3],['L3',4],['L2',5],['L2',6]] },
 
   { id:'A-002', name:'Terminal', type:'agent', role:'全栈工程师',
     detail:'全自动管线、代码开发、QA、发布、数据采集。\n所有项目的 L1-L0 执行者',
-    z:'中间', positions:[['L1',8],['L1',9],['L1',10],['L2',7],['L0',2],['L0',3],['L0',4],['L0',5],['L0',6],['L0',7],['L0',8],['L0',9],['L0',10],['L0',11]] },
+    positions:[['L1',8],['L1',9],['L1',10],['L2',7],['L0',2],['L0',3],['L0',4],['L0',5],['L0',6],['L0',7],['L0',8],['L0',9],['L0',10],['L0',11]] },
 
   { id:'A-003', name:'llm-wiki', type:'agent new', role:'知识库编译员',
     detail:'Karpathy 方案。raw research → markdown wiki。\n多项目共用知识库',
-    z:'系统', positions:[['L3',2],['L3',3],['L2',2]] },
+    positions:[['L3',2],['L3',3],['L2',2]] },
 
   { id:'A-004', name:'ChatGPT', type:'agent pending', role:'创意总监',
     detail:'DALL·E 视觉生成 + Andy口语练习。待激活。',
-    z:'人', positions:[['L2',5]] },
+    positions:[['L2',5]] },
 
   { id:'A-005', name:'Gemini', type:'agent pending', role:'运营分析',
     detail:'Google 生态扫描 + 学术检索 + 竞品分析。待激活。',
-    z:'中间', positions:[['L2',6],['L2',7]] },
+    positions:[['L2',6],['L2',7]] },
 
-  { id:'T-001', name:'飞轮skill', type:'tool', role:'诊断引擎', detail:'subject-flywheel skill，S0-S6 全程诊断', z:'人', positions:[['L4',0],['L4',1],['L4',2],['L4',3],['L4',4]] },
-  { id:'T-002', name:'FTA', type:'tool', role:'故障自修复', detail:'Failure-Triggered Autoresearch', z:'系统', positions:[['L4',11]] },
-  { id:'T-003', name:'topic_q', type:'tool', role:'主题状态机', detail:'topic_queue.yaml 状态流转', z:'系统', positions:[['L2',7],['L1',8],['L1',9]] },
-  { id:'T-004', name:'n8n', type:'tool infra', role:'工作流调度', detail:'19 节点 pipeline · localhost:5678', z:'系统', positions:[['L0',4],['L0',5]] },
-  { id:'T-005', name:'Docker', type:'tool infra', role:'容器编排', detail:'Metabase + n8n + pipeline-runner + DailyHotApi', z:'系统', positions:[['L0',2],['L0',3]] },
-  { id:'T-006', name:'ChromaDB', type:'tool', role:'向量检索', detail:'语义相似度检索', z:'系统', positions:[['L2',2]] },
-  { id:'T-007', name:'Metabase', type:'tool', role:'BI 看板', detail:'27 看板 352 cards + 投资看板', z:'人', positions:[['L2',6],['L1',10]] },
-  { id:'T-008', name:'ffmpeg', type:'tool', role:'视频合成', detail:'多图+多音频→视频', z:'系统', positions:[['L1',9]] },
-  { id:'T-009', name:'edge-tts', type:'tool', role:'AI 配音', detail:'微软 TTS 免费配音', z:'系统', positions:[['L1',9]] },
-  { id:'T-010', name:'Playwright', type:'tool', role:'截图→幻灯片', detail:'HTML→PNG slide', z:'系统', positions:[['L1',9]] },
-  { id:'T-011', name:'auto-pub', type:'tool', role:'自动发布(❌作废)', detail:'social-auto-upload\n❌ CEO 2026-04-15 作废（升级自暂停）\n• 早上 XHS 发自动化警告\n• 下午 Code 自愈触发真自动发帖事故 (note 69df108c... 已被 Lijuan 删)\n• publish_scheduler.py 永久 freeze\n重启需：14天冷静期 + 真机ADB + 小号灰度 + CEO 书面重开', z:'系统', positions:[['L1',10]] },
-  { id:'T-012', name:'Crawler', type:'tool', role:'竞品抓取', detail:'MediaCrawler 竞品数据源', z:'系统', positions:[['L2',7]] },
-  { id:'T-013', name:'yt-dlp', type:'tool', role:'视频下载', detail:'YouTube/B站视频素材下载', z:'系统', positions:[['L1',2]] },
-  { id:'T-014', name:'Whisper', type:'tool', role:'语音转文字', detail:'转录引擎', z:'系统', positions:[['L1',2]] },
-  { id:'T-015', name:'GitHub', type:'tool infra', role:'版本控制', detail:'glypsin 账号', z:'系统', positions:[['L0',9],['L0',10]] },
-  { id:'T-016', name:'GDrive', type:'tool infra', role:'文件同步', detail:'Mac↔Huawei 跨机器同步', z:'系统', positions:[['L0',10],['L0',11]] },
-  { id:'T-017', name:'gstack', type:'tool infra', role:'开发工具链', detail:'23 个 slash commands', z:'系统', positions:[['L0',8],['L0',9]] },
-  { id:'T-018', name:'memory/', type:'tool', role:'组织记忆', detail:'Cowork 记忆持久化系统', z:'中间', positions:[['L4',3],['L3',3]] },
-  { id:'T-019', name:'auto-sched', type:'tool new', role:'发布调度', detail:'定时发布升级版', z:'系统', positions:[['L1',7],['L1',8]] },
-  { id:'T-020', name:'B站API', type:'tool new', role:'B站数据回流', detail:'B站创作中心API', z:'系统', positions:[['L2',9],['L2',10]] },
-  { id:'T-021', name:'红书采集', type:'tool new', role:'小红书数据回流', detail:'小红书数据采集', z:'系统', positions:[['L2',9],['L2',10]] },
-  { id:'T-022', name:'Plausible', type:'tool new', role:'跨平台统一指标', detail:'跨平台统一看板', z:'中间', positions:[['L2',8],['L2',9]] },
-  { id:'T-023', name:'Perplexity', type:'tool new', role:'深度研究', detail:'Perplexity API 话题深度研究', z:'人', positions:[['L3',2],['L3',4]] },
-  { id:'T-024', name:'Dataview', type:'tool new', role:'知识库查询', detail:'Obsidian Dataview 结构化查询', z:'中间', positions:[['L3',5],['L3',6]] },
-  { id:'T-025', name:'CapCut', type:'tool new', role:'字幕封面模板', detail:'CapCut/剪映模板引擎', z:'中间', positions:[['L1',6],['L1',7]] },
-  { id:'T-026', name:'ElevenLabs', type:'tool new', role:'高级配音', detail:'ElevenLabs/Fish Audio', z:'中间', positions:[['L1',6],['L1',7]] },
-  { id:'T-027', name:'DailyHotApi', type:'tool new', role:'热搜雷达', detail:'⭐3700+ 多平台趋势采集', z:'系统', positions:[['L2',0],['L2',1]] },
-  { id:'T-028', name:'评论情绪', type:'tool new', role:'评论采集+情绪分析', detail:'BilibiliCommentScraper + SnowNLP', z:'中间', positions:[['L2',10],['L2',11]] },
-  { id:'T-029', name:'原创检测', type:'tool new', role:'原创度双通道检测', detail:'videohash + recordlinkage', z:'系统', positions:[['L1',8],['L1',9]] },
-  { id:'T-030', name:'Macropodus', type:'tool new', role:'选题预筛器', detail:'⭐662 中文语义相似度', z:'系统', positions:[['L3',0],['L3',1]] },
-  { id:'T-031', name:'music_gen', type:'tool new', role:'AI配乐(ACE-Step)', detail:'acemusic.ai 免费BGM生成\n8 preset: corporate/upbeat/ambient/dramatic/tension/hopeful/cta/lofi\n来源: ADR-004 · D-001冒烟✅', z:'中间', positions:[['L1',8],['L1',9]] },
-  { id:'T-032', name:'sfx', type:'tool new', role:'转场音效', detail:'whoosh/click/pop 转场点音效\n来源: ADR-004 claude-code-video-toolkit', z:'中间', positions:[['L1',9]] },
-  { id:'T-033', name:'addmusic', type:'tool new', role:'叠BGM到视频', detail:'给已有mp4叠BGM\nffmpeg后处理管线\n来源: ADR-004', z:'中间', positions:[['L1',8],['L1',9]] },
-  { id:'T-034', name:'sync_timing', type:'tool new', role:'音频锚定时间线', detail:'音频生成后反查scene时长回写config\naudio-anchored timeline原则\n来源: ADR-004', z:'系统', positions:[['L1',8]] },
-  { id:'T-035', name:'Chart-Gen', type:'tool new', role:'K线/组合可视化', detail:'mplfinance + plotly\n股价走势图 / 持仓饼图 / 回测曲线\n服务 P06 AI投研日记', z:'中间', positions:[['L1',6],['L1',7]] },
-  { id:'T-036', name:'Compliance-Injector', type:'tool new', role:'合规文案注入', detail:'自动加 "不构成投资建议" 声明\nYouTube 描述/视频开头/结尾模板\n服务 P06', z:'系统', positions:[['L1',8]] },
-  { id:'T-037', name:'YT-Uploader', type:'tool new', role:'YouTube 发布', detail:'YouTube Data API v3\n标题/描述/标签/缩略图/排期\n服务 P06 发布环节', z:'中间', positions:[['L2',9],['L2',10]] },
-  { id:'T-038', name:'YT-Analytics', type:'tool new', role:'YouTube 数据回流', detail:'YouTube Analytics API v2\n观看时长/留存/订阅转化/CPM\n服务 P06 ⑪效果环节', z:'中间', positions:[['L2',10],['L2',11]] },
-  { id:'T-039', name:'autoresearch-fta', type:'tool new', role:'⑩ 状态哨兵', detail:'fta_diagnose.py MVP\nlaunchd 每日09:00\n规则集 rules/p04_mvp_v01.yaml (R1/R2/R3)\n输出 failures/{date}.md\n只读不改 · 状态层10 · 观察位\n2026-04-15 上线 P04\n未来扩 P03 加 p03_mvp.yaml', z:'人', positions:[['L0',2]] },
-  { id:'T-040', name:'ljg-rank', type:'tool new', role:'② 预筛排序(待装)', detail:'fork lijigang/ljg-skills\n秩序层6 · 执行位\n改预筛算法加"可合成性"维度\n装配条件：⑫roundtable 触发改配置\n暂未装', z:'中间', positions:[['L1',1]] },
-  { id:'T-041', name:'ljg-invest', type:'tool new', role:'⑪ 效果读数(待装)', detail:'fork lijigang/ljg-skills\n指标层7+权重层8 · 观察位\n读 GRW/VPV/ENG/SIG/ROI/MON · 判🟢🟡🔴\n装配条件：已发 notes≥10条 + T72h snapshot 齐\n暂未装', z:'中间', positions:[['L2',10],['L2',11]] },
-  { id:'T-042', name:'ljg-roundtable', type:'tool new', role:'⑫ 迭代决议(待装·门槛恢复)', detail:'fork lijigang/ljg-skills\n状态层10 · 观察位 → 自动回写\n多角色读状态 · 直接回写topic_queue/prompts/weights\n必带熔断(3轮🔴冻结) + 回滚(git版本化)\n\n装配条件 (2026-04-15 复原+加严)：\n• ⑩ 跑稳≥2 周（人判，不再用"成功率自判"）\n• 0 次副作用事件\n• Lijuan 书面同意\n• Cowork+Code 双签 + 24h 静默期\n• 先做 stress test 再实施\n\n手工版 roundtable 已可用 (autoresearch-experiments/roundtables/)\n2026-04-15 已开 2 次 · 不自动回写', z:'人', positions:[['L2',11]] },
-  { id:'N-001', name:'Tailscale', type:'tool infra new', role:'三机 mesh 网络', detail:'Mac Air M4 · LG · Huawei XPro 三机全装\nWireGuard VPN · MagicDNS · SSH over tailnet\n上线 2026-04-14\n用途：跨机访问 localhost 服务 + 远程运维\nFunnel 暂不启用（安全收益负值）', z:'系统', positions:[['L0',0],['L0',1]] },
-  { id:'F-001', name:'ai-hedge-fund', type:'agent new', role:'投资大师 agent 团', detail:'virattt/ai-hedge-fund · GitHub 开源\nBuffett / Munger / Ackman / Wood / Damodaran 等 prompt agent\n定位：memo red-team（挑刺），非决策器\n数据：美股可用，A股/港股数据稀\n招入 2026-04-14 · 待 fork 到 glypsin', z:'中间', positions:[['L3',2],['L3',3]] },
-
-  // ═══════════════════════════════════════════════
-  // DEV TOOLS: 97 个独立工具 (gstack 32 + Cowork 65)
-  // 格式: [id, 显示名, type, detail, level, col]
-  // ═══════════════════════════════════════════════
-  // --- gstack 32 commands (Terminal 🟣) ---
-  // 规划 6
-  ...[
-    ['g01','/office-hrs','gstack','YC 产品诊断 6 问','L4',0],
-    ['g02','/plan-ceo','gstack','CEO 战略审','L4',1],
-    ['g03','/plan-eng','gstack','工程架构审','L4',2],
-    ['g04','/plan-design','gstack','设计审','L3',3],
-    ['g05','/plan-devex','gstack','DX 审','L3',4],
-    ['g06','/autoplan','gstack','一键三审','L4',3],
-    // 设计 4
-    ['g07','/design-consult','gstack','从零建设计系统','L3',2],
-    ['g08','/design-shotgun','gstack','多方案视觉探索','L2',3],
-    ['g09','/design-html','gstack','设计→HTML','L2',4],
-    ['g10','/design-review','gstack','视觉审+修复','L2',7],
-    // 交付 3
-    ['g11','/review','gstack','代码审查','L1',7],
-    ['g12','/ship','gstack','测试+PR','L1',10],
-    ['g13','/land-deploy','gstack','merge→deploy→canary','L0',10],
-    // 质检 4
-    ['g14','/qa','gstack','浏览器测试+修','L1',6],
-    ['g15','/qa-only','gstack','只报不修','L1',6],
-    ['g16','/cso','gstack','OWASP+STRIDE 安全审','L0',7],
-    ['g17','/benchmark','gstack','性能回归检测','L1',8],
-    // 诊断 2
-    ['g18','/investigate','gstack','root cause 分析','L1',0],
-    ['g19','/browse','gstack','Headless 截图验证','L1',1],
-    // 二审 1
-    ['g20','/codex','gstack','OpenAI 独立审(非自审)','L2',8],
-    // 收尾 4
-    ['g21','/doc-release','gstack','发布后更新文档','L2',9],
-    ['g22','/retro','gstack','周度复盘','L2',11],
-    ['g23','/learn','gstack','记录教训→持久化','L2',10],
-    ['g24','/checkpoint','gstack','保存/恢复进度','L3',9],
-    // 安全 8
-    ['g25','/careful','gstack','危险操作保护','L0',5],
-    ['g26','/freeze','gstack','锁定 edit 目录','L0',5],
-    ['g27','/guard','gstack','不可逆操作门禁','L0',6],
-    ['g28','/unfreeze','gstack','解锁 freeze','L0',6],
-    ['g29','/canary','gstack','部署后监控','L0',10],
-    ['g30','/setup-deploy','gstack','部署配置','L0',9],
-    ['g31','/setup-cookies','gstack','cookie 导入','L0',0],
-    ['g32','/gstack-up','gstack','自我升级','L0',11],
-  ].map(([id,name,type,detail,lvl,col])=>({id,name,type,role:detail,detail,z:'',positions:[[lvl,col]]})),
-
-  // --- Cowork 65 skills (桌面端 🔵) ---
-  ...[
-    // 工程 10
-    ['s01','architecture','skill','架构决策记录 ADR','L1',2],
-    ['s02','code-review','skill','安全/性能/正确性审查','L1',7],
-    ['s03','debug','skill','结构化调试','L1',0],
-    ['s04','deploy-check','skill','部署前验证清单','L1',10],
-    ['s05','documentation','skill','技术文档/runbook','L2',9],
-    ['s06','incident-resp','skill','事故响应+复盘','L1',0],
-    ['s07','standup','skill','站会更新','L2',11],
-    ['s08','system-design','skill','系统/架构设计','L2',2],
-    ['s09','tech-debt','skill','技术债优先级','L2',8],
-    ['s10','test-strategy','skill','测试策略+计划','L1',6],
-    // 数据 10
-    ['s11','analyze','skill','数据全链路分析','L3',6],
-    ['s12','stat-analysis','skill','统计/假设检验','L3',7],
-    ['s13','create-viz','skill','Python 可视化','L3',10],
-    ['s14','data-viz','skill','图表最佳实践','L3',11],
-    ['s15','dashboard','skill','交互式 HTML 看板','L2',11],
-    ['s16','explore-data','skill','数据画像/质量','L3',1],
-    ['s17','validate-data','skill','分析 QA 校验','L3',8],
-    ['s18','write-query','skill','跨方言 SQL','L2',5],
-    ['s19','sql-queries','skill','CTE/窗口函数','L2',6],
-    ['s20','data-context','skill','数据上下文提取','L3',0],
-    // 运营 9
-    ['s21','process-doc','skill','流程/RACI/SOP','L2',4],
-    ['s22','process-optim','skill','流程瓶颈优化','L2',4],
-    ['s23','runbook','skill','操作手册','L2',9],
-    ['s24','change-req','skill','变更管理','L2',4],
-    ['s25','capacity-plan','skill','资源容量规划','L2',3],
-    ['s26','compliance','skill','合规/审计准备','L2',7],
-    ['s27','risk-assess','skill','风险识别/缓解','L2',8],
-    ['s28','status-report','skill','KPI 状态报告','L3',11],
-    ['s29','vendor-review','skill','供应商评估/TCO','L2',8],
-    // 营销 8
-    ['s30','campaign','skill','营销活动规划','L3',4],
-    ['s31','competitive','skill','竞品定位对比','L3',1],
-    ['s32','content-create','skill','跨渠道内容','L3',5],
-    ['s33','draft-content','skill','文案/着陆页','L3',5],
-    ['s34','email-seq','skill','邮件序列/分支','L3',5],
-    ['s35','perf-report','skill','营销效果报告','L3',10],
-    ['s36','seo-audit','skill','SEO/关键词/差距','L3',7],
-    ['s37','brand-review','skill','品牌合规审查','L3',8],
-    // 财务 8
-    ['s38','fin-statements','skill','三表+期间对比','L4',6],
-    ['s39','variance','skill','方差/瀑布分析','L4',7],
-    ['s40','journal-entry','skill','分录(借贷)','L4',5],
-    ['s41','je-prep','skill','月末分录准备','L4',5],
-    ['s42','reconcile','skill','对账(GL/银行)','L4',7],
-    ['s43','close-mgmt','skill','月结流程管理','L4',9],
-    ['s44','audit-support','skill','SOX 404 合规','L4',8],
-    ['s45','sox-testing','skill','SOX 测试底稿','L4',8],
-    // 品牌 6
-    ['s46','brand-enforce','skill','品牌指南→内容','L4',4],
-    ['s47','guideline-gen','skill','从素材生成指南','L4',4],
-    ['s48','discover-brand','skill','跨平台素材发现','L4',1],
-    ['s49','enforce-voice','skill','应用品牌声音','L3',4],
-    ['s50','gen-guidelines','skill','生成品牌指南','L3',3],
-    ['s51','brand-review2','skill','品牌一致性审查','L3',8],
-    // 效率 4
-    ['s52','task-mgmt','skill','TASKS.md 任务','L4',3],
-    ['s53','memory-mgmt','skill','MEMORY.md 记忆','L4',9],
-    ['s54','start','skill','初始化仪表盘','L4',0],
-    ['s55','update','skill','同步+刷新','L4',11],
-    // 文档 4
-    ['s56','docx','skill','Word 文档','L0',3],
-    ['s57','xlsx','skill','Excel 表格','L0',3],
-    ['s58','pptx','skill','PowerPoint','L0',4],
-    ['s59','pdf','skill','PDF 处理','L0',4],
-    // 管理 4
-    ['s60','schedule','skill','定时任务','L0',4],
-    ['s61','setup-cowork','skill','Cowork 初始化','L0',0],
-    ['s62','skill-creator','skill','skill 创建/评测','L0',2],
-    ['s63','consolidate','skill','记忆整理去重','L0',9],
-  ].map(([id,name,type,detail,lvl,col])=>({id,name,type,role:detail,detail,z:'',positions:[[lvl,col]]})),
+  { id:'T-001', name:'飞轮skill', type:'tool', role:'诊断引擎', detail:'subject-flywheel skill，S0-S6 全程诊断', positions:[['L4',0],['L4',1],['L4',2],['L4',3],['L4',4]] },
+  { id:'T-002', name:'FTA', type:'tool', role:'故障自修复', detail:'Failure-Triggered Autoresearch', positions:[['L4',11]] },
+  { id:'T-003', name:'topic_q', type:'tool', role:'主题状态机', detail:'topic_queue.yaml 状态流转', positions:[['L2',7],['L1',8],['L1',9]] },
+  { id:'T-004', name:'n8n', type:'tool infra', role:'工作流调度', detail:'19 节点 pipeline · localhost:5678', positions:[['L0',4],['L0',5]] },
+  { id:'T-005', name:'Docker', type:'tool infra', role:'容器编排', detail:'Metabase + n8n + pipeline-runner + DailyHotApi', positions:[['L0',2],['L0',3]] },
+  { id:'T-006', name:'ChromaDB', type:'tool', role:'向量检索', detail:'语义相似度检索', positions:[['L2',2]] },
+  { id:'T-007', name:'Metabase', type:'tool', role:'BI 看板', detail:'27 看板 352 cards + 投资看板', positions:[['L2',6],['L1',10]] },
+  { id:'T-008', name:'ffmpeg', type:'tool', role:'视频合成', detail:'多图+多音频→视频', positions:[['L1',9]] },
+  { id:'T-009', name:'edge-tts', type:'tool', role:'AI 配音', detail:'微软 TTS 免费配音', positions:[['L1',9]] },
+  { id:'T-010', name:'Playwright', type:'tool', role:'截图→幻灯片', detail:'HTML→PNG slide', positions:[['L1',9]] },
+  { id:'T-011', name:'auto-pub', type:'tool', role:'自动发布(❌作废)', detail:'social-auto-upload\n❌ CEO 2026-04-15 作废（升级自暂停）\n• 早上 XHS 发自动化警告\n• 下午 Code 自愈触发真自动发帖事故 (note 69df108c... 已被 Lijuan 删)\n• publish_scheduler.py 永久 freeze\n重启需：14天冷静期 + 真机ADB + 小号灰度 + CEO 书面重开', positions:[['L1',10]] },
+  { id:'T-012', name:'Crawler', type:'tool', role:'竞品抓取', detail:'MediaCrawler 竞品数据源', positions:[['L2',7]] },
+  { id:'T-013', name:'yt-dlp', type:'tool', role:'视频下载', detail:'YouTube/B站视频素材下载', positions:[['L1',2]] },
+  { id:'T-014', name:'Whisper', type:'tool', role:'语音转文字', detail:'转录引擎', positions:[['L1',2]] },
+  { id:'T-015', name:'GitHub', type:'tool infra', role:'版本控制', detail:'glypsin 账号', positions:[['L0',9],['L0',10]] },
+  { id:'T-016', name:'GDrive', type:'tool infra', role:'文件同步', detail:'Mac↔Huawei 跨机器同步', positions:[['L0',10],['L0',11]] },
+  { id:'T-017', name:'gstack', type:'tool infra', role:'开发工具链', detail:'23 个 slash commands', positions:[['L0',8],['L0',9]] },
+  { id:'T-018', name:'memory/', type:'tool', role:'组织记忆', detail:'Cowork 记忆持久化系统', positions:[['L4',3],['L3',3]] },
+  { id:'T-019', name:'auto-sched', type:'tool new', role:'发布调度', detail:'定时发布升级版', positions:[['L1',7],['L1',8]] },
+  { id:'T-020', name:'B站API', type:'tool new', role:'B站数据回流', detail:'B站创作中心API', positions:[['L2',9],['L2',10]] },
+  { id:'T-021', name:'红书采集', type:'tool new', role:'小红书数据回流', detail:'小红书数据采集', positions:[['L2',9],['L2',10]] },
+  { id:'T-022', name:'Plausible', type:'tool new', role:'跨平台统一指标', detail:'跨平台统一看板', positions:[['L2',8],['L2',9]] },
+  { id:'T-023', name:'Perplexity', type:'tool new', role:'深度研究', detail:'Perplexity API 话题深度研究', positions:[['L3',2],['L3',4]] },
+  { id:'T-024', name:'Dataview', type:'tool new', role:'知识库查询', detail:'Obsidian Dataview 结构化查询', positions:[['L3',5],['L3',6]] },
+  { id:'T-025', name:'CapCut', type:'tool new', role:'字幕封面模板', detail:'CapCut/剪映模板引擎', positions:[['L1',6],['L1',7]] },
+  { id:'T-026', name:'ElevenLabs', type:'tool new', role:'高级配音', detail:'ElevenLabs/Fish Audio', positions:[['L1',6],['L1',7]] },
+  { id:'T-027', name:'DailyHotApi', type:'tool new', role:'热搜雷达', detail:'⭐3700+ 多平台趋势采集', positions:[['L2',0],['L2',1]] },
+  { id:'T-028', name:'评论情绪', type:'tool new', role:'评论采集+情绪分析', detail:'BilibiliCommentScraper + SnowNLP', positions:[['L2',10],['L2',11]] },
+  { id:'T-029', name:'原创检测', type:'tool new', role:'原创度双通道检测', detail:'videohash + recordlinkage', positions:[['L1',8],['L1',9]] },
+  { id:'T-030', name:'Macropodus', type:'tool new', role:'选题预筛器', detail:'⭐662 中文语义相似度', positions:[['L3',0],['L3',1]] },
+  { id:'T-031', name:'music_gen', type:'tool new', role:'AI配乐(ACE-Step)', detail:'acemusic.ai 免费BGM生成\n8 preset: corporate/upbeat/ambient/dramatic/tension/hopeful/cta/lofi\n来源: ADR-004 · D-001冒烟✅', positions:[['L1',8],['L1',9]] },
+  { id:'T-032', name:'sfx', type:'tool new', role:'转场音效', detail:'whoosh/click/pop 转场点音效\n来源: ADR-004 claude-code-video-toolkit', positions:[['L1',9]] },
+  { id:'T-033', name:'addmusic', type:'tool new', role:'叠BGM到视频', detail:'给已有mp4叠BGM\nffmpeg后处理管线\n来源: ADR-004', positions:[['L1',8],['L1',9]] },
+  { id:'T-034', name:'sync_timing', type:'tool new', role:'音频锚定时间线', detail:'音频生成后反查scene时长回写config\naudio-anchored timeline原则\n来源: ADR-004', positions:[['L1',8]] },
+  { id:'T-035', name:'Chart-Gen', type:'tool new', role:'K线/组合可视化', detail:'mplfinance + plotly\n股价走势图 / 持仓饼图 / 回测曲线\n服务 P06 AI投研日记', positions:[['L1',6],['L1',7]] },
+  { id:'T-036', name:'Compliance-Injector', type:'tool new', role:'合规文案注入', detail:'自动加 "不构成投资建议" 声明\nYouTube 描述/视频开头/结尾模板\n服务 P06', positions:[['L1',8]] },
+  { id:'T-037', name:'YT-Uploader', type:'tool new', role:'YouTube 发布', detail:'YouTube Data API v3\n标题/描述/标签/缩略图/排期\n服务 P06 发布环节', positions:[['L2',9],['L2',10]] },
+  { id:'T-038', name:'YT-Analytics', type:'tool new', role:'YouTube 数据回流', detail:'YouTube Analytics API v2\n观看时长/留存/订阅转化/CPM\n服务 P06 ⑪效果环节', positions:[['L2',10],['L2',11]] },
+  { id:'T-039', name:'autoresearch-fta', type:'tool new', role:'⑩ 状态哨兵', detail:'fta_diagnose.py MVP\nlaunchd 每日09:00\n规则集 rules/p04_mvp_v01.yaml (R1/R2/R3)\n输出 failures/{date}.md\n只读不改 · 状态层10 · 观察位\n2026-04-15 上线 P04\n未来扩 P03 加 p03_mvp.yaml', positions:[['L0',2]] },
+  { id:'T-040', name:'ljg-rank', type:'tool new', role:'② 预筛排序(待装)', detail:'fork lijigang/ljg-skills\n秩序层6 · 执行位\n改预筛算法加"可合成性"维度\n装配条件：⑫roundtable 触发改配置\n暂未装', positions:[['L1',1]] },
+  { id:'T-041', name:'ljg-invest', type:'tool new', role:'⑪ 效果读数(待装)', detail:'fork lijigang/ljg-skills\n指标层7+权重层8 · 观察位\n读 GRW/VPV/ENG/SIG/ROI/MON · 判🟢🟡🔴\n装配条件：已发 notes≥10条 + T72h snapshot 齐\n暂未装', positions:[['L2',10],['L2',11]] },
+  { id:'T-042', name:'ljg-roundtable', type:'tool new', role:'⑫ 迭代决议(待装·门槛恢复)', detail:'fork lijigang/ljg-skills\n状态层10 · 观察位 → 自动回写\n多角色读状态 · 直接回写topic_queue/prompts/weights\n必带熔断(3轮🔴冻结) + 回滚(git版本化)\n\n装配条件 (2026-04-15 复原+加严)：\n• ⑩ 跑稳≥2 周（人判，不再用"成功率自判"）\n• 0 次副作用事件\n• Lijuan 书面同意\n• Cowork+Code 双签 + 24h 静默期\n• 先做 stress test 再实施\n\n手工版 roundtable 已可用 (autoresearch-experiments/roundtables/)\n2026-04-15 已开 2 次 · 不自动回写', positions:[['L2',11]] },
+  { id:'N-001', name:'Tailscale', type:'tool infra new', role:'三机 mesh 网络', detail:'Mac Air M4 · LG · Huawei XPro 三机全装\nWireGuard VPN · MagicDNS · SSH over tailnet\n上线 2026-04-14\n用途：跨机访问 localhost 服务 + 远程运维\nFunnel 暂不启用（安全收益负值）', positions:[['L0',0],['L0',1]] },
+  { id:'F-001', name:'ai-hedge-fund', type:'agent new', role:'投资大师 agent 团', detail:'virattt/ai-hedge-fund · GitHub 开源\nBuffett / Munger / Ackman / Wood / Damodaran 等 prompt agent\n定位：memo red-team（挑刺），非决策器\n数据：美股可用，A股/港股数据稀\n招入 2026-04-14 · 待 fork 到 glypsin', positions:[['L3',2],['L3',3]] },
 ];
 
 // ═══════════════════════════════════════════════
@@ -651,20 +510,6 @@ const projects = [
       'N-001': '[CTO基建] Tailscale · LG 远程审阅 Mac pipeline 输出',
     },
   },
-  {
-    id: 'DEV', name: '开发工具箱 · Skills Map', icon: '🛠️', color: '#a78bfa',
-    desc: 'gstack 32 commands (Terminal 🟣) + Cowork 65 skills (桌面端 🔵) = 97 个 AI 工具',
-    org: '跨项目复用 · ai-agency-lab',
-    active: new Set([
-      'g01','g02','g03','g04','g05','g06','g07','g08','g09','g10','g11','g12','g13','g14','g15','g16',
-      'g17','g18','g19','g20','g21','g22','g23','g24','g25','g26','g27','g28','g29','g30','g31','g32',
-      's01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16',
-      's17','s18','s19','s20','s21','s22','s23','s24','s25','s26','s27','s28','s29','s30','s31','s32',
-      's33','s34','s35','s36','s37','s38','s39','s40','s41','s42','s43','s44','s45','s46','s47','s48',
-      's49','s50','s51','s52','s53','s54','s55','s56','s57','s58','s59','s60','s61','s62','s63']),
-    details: {},
-    posOverrides: {},
-  },
 ];
 
 // ═══════════════════════════════════════════════
@@ -677,7 +522,6 @@ const projectWorkflow = {
   P04: ['热搜','预筛','定夺','调研','文案','封面','合成','质检','发布','FTA诊断✅','效果(待ljg-invest)','迭代(待ljg-roundtable)'],
   P05: ['需求','架构','设计','开发','调试','封装','测试','平衡','优化','QA','部署','迭代'],
   P06: ['决策池','决策筛选','定夺','研究补充','脚本','素材','配音','合成','合规审查','发布','效果','迭代'],
-  DEV: ['诊断','审题','架构','设计','计划','编码','测试','审查','二审','存档','发布','复盘'],
 };
 
 // 12 工序对应的 C-suite 职位（r-ceo/coo/cpo/cto/cmo/cio/chro/cfo/board/andy）
@@ -688,7 +532,6 @@ const projectRoles = {
   P04: ['CMO','CPO','CEO','CPO','CPO','CPO','CTO','CPO','CMO','CIO','CMO','BOARD'],
   P05: ['ANDY','CPO','CPO','CTO','CTO','CTO','CTO','CPO','CTO','CTO','CMO','ANDY'],
   P06: ['BOARD','CEO','CEO','CPO','CPO','CPO','CPO','CTO','CHRO','CMO','CMO','CEO'],
-  DEV: ['CEO','CEO','CTO','CTO','COO','CTO','CTO','CFO','BOARD','CIO','CEO','CEO'],
 };
 
 // ═══════════════════════════════════════════════
@@ -911,60 +754,10 @@ const productCards = {
         </div>
       </div>
     </div>`,
-  'DEV': `
-    <div class="account-layer">
-      <h2>🛠️ 开发工具箱 · gstack + Cowork Skills</h2>
-      <div class="al-sub">Terminal 32 commands (🟣 紫色) + Cowork 65 skills (🔵 青色) = 97 个 AI 工具 · 两端不互通</div>
-      <div class="account-cards">
-        <div class="account-card" style="border-color:#7c3aed55;">
-          <div class="ac-header">
-            <span class="ac-id">TERMINAL</span>
-            <span class="ac-name">gstack</span>
-            <span class="ac-platform" style="background:#7c3aed;color:#fff;">32 commands</span>
-          </div>
-          <div style="font-size:11px;color:#7c3aed;margin:4px 0 2px;">Garry Tan (YC CEO) 开源 · Claude Code Terminal 专属 · ~/.claude/skills/gstack/</div>
-          <div class="ac-status">🟢 已安装 · 8 个功能集群</div>
-          <div class="ac-metrics">
-            <div class="ac-metric"><div class="label">规划</div><div class="value" style="color:#c084fc">6</div><div class="target">L4-L3</div></div>
-            <div class="ac-metric"><div class="label">设计</div><div class="value" style="color:#60a5fa">4</div><div class="target">L2-L1</div></div>
-            <div class="ac-metric"><div class="label">交付</div><div class="value" style="color:#4ade80">3</div><div class="target">L1-L0</div></div>
-            <div class="ac-metric"><div class="label">质检</div><div class="value" style="color:#facc15">4</div><div class="target">L1-L0</div></div>
-            <div class="ac-metric"><div class="label">诊断+二审</div><div class="value" style="color:#fb923c">3</div><div class="target">L1-L2</div></div>
-            <div class="ac-metric"><div class="label">安全+收尾</div><div class="value" style="color:#ef4444">12</div><div class="target">L0-L2</div></div>
-          </div>
-          <div class="ac-serving">完整流程：<span>/office-hours → /autoplan → 实施 → /codex challenge → /review → /ship → /checkpoint</span></div>
-        </div>
-        <div class="account-card" style="border-color:#0891b255;">
-          <div class="ac-header">
-            <span class="ac-id">COWORK</span>
-            <span class="ac-name">Skills</span>
-            <span class="ac-platform" style="background:#0891b2;color:#fff;">65 skills</span>
-          </div>
-          <div style="font-size:11px;color:#0891b2;margin:4px 0 2px;">Cowork 桌面端插件 · CEO 直接使用 · 自动路由</div>
-          <div class="ac-status">🟢 已安装 · 9 个分类</div>
-          <div class="ac-metrics">
-            <div class="ac-metric"><div class="label">工程</div><div class="value" style="color:#60a5fa">10</div><div class="target">L1</div></div>
-            <div class="ac-metric"><div class="label">数据</div><div class="value" style="color:#4ade80">10</div><div class="target">L2-L3</div></div>
-            <div class="ac-metric"><div class="label">运营</div><div class="value" style="color:#facc15">9</div><div class="target">L2</div></div>
-            <div class="ac-metric"><div class="label">营销</div><div class="value" style="color:#fb923c">8</div><div class="target">L2</div></div>
-            <div class="ac-metric"><div class="label">财务</div><div class="value" style="color:#f59e0b">8</div><div class="target">L3</div></div>
-            <div class="ac-metric"><div class="label">品牌+效率+文档+管理</div><div class="value" style="color:#c084fc">20</div><div class="target">L0-L4</div></div>
-          </div>
-          <div class="ac-serving">触发方式：<span>用户请求自动路由 · 或显式调用 skill name</span></div>
-        </div>
-      </div>
-      <div style="margin-top:12px;padding:8px 10px;background:#1a1024;border-left:3px solid #a78bfa;border-radius:4px;font-size:10px;color:#ddd;line-height:1.7;">
-        <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">两端不互通 · 各跑各的</div>
-        <div>🟣 <b>gstack</b> 装在 Terminal (~/.claude/skills/gstack/) · Terminal session 内 /command 调用</div>
-        <div>🔵 <b>Skills</b> 装在 Cowork 桌面端插件 · Cowork session 内自动路由</div>
-        <div style="color:#888;margin-top:4px;">共享方式：CLAUDE.md + SKILL-INDEX.md · Terminal 可 cat 读 Cowork skill 文本但不会主动调</div>
-        <div style="color:#facc15;margin-top:4px;">⚠️ 今日教训(4/17)：Terminal 规划阶段走了 gstack，实施阶段脱缰 — gstack 没有"回去问 CEO"的 command</div>
-      </div>
-    </div>`,
   'all': `
     <div class="account-layer">
       <h2>📊 全部项目产品一览</h2>
-      <div class="al-sub">7个页面 · 6项目 + 1工具箱 · 3种产品形态（财务系统/投资系统/MCN账号/游戏）+ 97 AI 工具</div>
+      <div class="al-sub">6个项目 · 3种产品形态（财务系统/投资系统/MCN账号/游戏）· 44员工共用平面</div>
       <div class="account-cards">
         <div class="account-card" style="border-color:#f59e0b55;flex:0 0 auto;min-width:200px;">
           <div class="ac-header"><span class="ac-id">P01</span><span class="ac-name" style="font-size:13px;">🏛️ 家办财务</span></div>
@@ -1035,11 +828,6 @@ const deviceAlloc = {
     lg:  { role: '审阅+定夺', primary: ['H-001','A-001','T-018'], tasks: '大屏审阅 memo 和成片 · 选题定夺 · IP 人设把关 · Tailscale→Mac' },
     huawei: { role: '—', primary: [], tasks: '本项目不涉及对外发布（YouTube 直接 Mac 发）' },
   },
-  DEV: {
-    mac: { role: '全部工具运行', primary: [...Array(32)].map((_,i)=>`g${String(i+1).padStart(2,'0')}`).concat([...Array(63)].map((_,i)=>`s${String(i+1).padStart(2,'0')}`)), tasks: '97 个 AI 工具全在 Mac Air M4\ngstack 32 (Terminal) + Cowork 65 (桌面端)' },
-    lg:  { role: '—', primary: [], tasks: '仅查看' },
-    huawei: { role: '—', primary: [], tasks: '—' },
-  },
 };
 
 // ═══════════════════════════════════════════════
@@ -1062,7 +850,7 @@ const projectStatus = {
   P03: {
     'H-001':'done','A-001':'done','A-003':'done','A-004':'done','A-005':'done',
     'T-001':'done','T-002':'todo','T-003':'done','T-005':'done','T-006':'done',
-    'T-007':'todo','T-008':'done','T-009':'done','T-010':'done','T-011':'wip',
+    'T-007':'todo','T-008':'done','T-009':'done','T-010':'done','T-011':'blocked',
     'T-013':'done','T-014':'done','T-015':'done','T-016':'done','T-017':'done',
     'T-018':'done','T-019':'wip','T-020':'todo','T-022':'todo','T-023':'done',
     'T-024':'done','T-026':'done','T-028':'todo','T-029':'done','T-031':'done',
@@ -1070,12 +858,13 @@ const projectStatus = {
   },
   P04: {
     'H-001':'done','A-001':'done','A-003':'done','A-004':'done','A-005':'done',
-    'T-001':'done','T-002':'done','T-005':'done','T-008':'done','T-011':'todo',
+    'T-001':'done','T-002':'done','T-005':'done','T-008':'done','T-011':'blocked',
     'T-013':'done','T-015':'done','T-016':'done','T-017':'done','T-018':'done',
     'T-019':'done','T-020':'todo','T-021':'todo','T-022':'todo','T-023':'done',
     'T-024':'done','T-025':'done','T-026':'done','T-027':'done','T-028':'todo',
     'T-029':'blocked','T-030':'done','T-031':'done','T-032':'blocked','T-033':'done',
     'T-034':'done',
+    'T-039':'done','T-040':'todo','T-041':'todo','T-042':'todo',
   },
   P05: {
     'H-001':'done','A-001':'done','A-002':'done','A-004':'todo',
@@ -1090,10 +879,6 @@ const projectStatus = {
     'T-035':'todo','T-036':'todo','T-037':'todo','T-038':'todo',
     'N-001':'wip',
   },
-  DEV: Object.fromEntries(
-    [...Array(32)].map((_,i)=>[`g${String(i+1).padStart(2,'0')}`,'wip'])
-    .concat([...Array(63)].map((_,i)=>[`s${String(i+1).padStart(2,'0')}`,'wip']))
-  ),
 };
 
 function getStatus(empId, proj) {
@@ -1192,12 +977,19 @@ function renderProjectInfo() {
 function renderGrid() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
+  const corner = document.createElement('div');
+  corner.style.cssText = 'font-size:10px;color:#555;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;';
+  corner.textContent = '层级 \\ 步骤';
+  grid.appendChild(corner);
+  steps.forEach(s => {
+    const h = document.createElement('div');
+    h.className = 'header-cell';
+    h.innerHTML = `<span class="step-num">${s.num}</span><span class="step-name">${s.name}</span>`;
+    grid.appendChild(h);
+  });
   const cellMap = {};
   levels.forEach(l => { steps.forEach((_, si) => { cellMap[`${l.id}-${si}`] = []; }); });
-  const isDEV = currentProject.id === 'DEV';
   employees.forEach(emp => {
-    // DEV 页只显示工具 badge (g01-g32, s01-s63)
-    if (isDEV && !emp.id.match(/^[gs]\d/)) return;
     const positions = getEmpPositions(emp, currentProject);
     const active = isEmpActive(emp, currentProject);
     const status = active ? getStatus(emp.id, currentProject) : null;
@@ -1239,33 +1031,12 @@ function renderGrid() {
         const label = emp.id.split('-')[0] === 'H' ? '👩' + emp.id : emp.id + ' ' + emp.name;
         const dot = (active && status && status !== 'todo') ? `<span class="sd ${status}"></span>` : '';
         const dtag = active ? deviceTagHtml(emp.id, currentProject) : '';
-        const zVal = emp.z || '';
-        const ztag = zVal ? `<span class="z-tag z-${zVal}">${zVal[0]}</span>` : '';
-        badge.innerHTML = label + dot + dtag + ztag;
+        badge.innerHTML = label + dot + dtag;
         badge.dataset.empId = emp.id;
         cell.appendChild(badge);
       });
       grid.appendChild(cell);
     });
-  });
-}
-function renderX1Header() {
-  const row = document.getElementById('x1-header-row');
-  row.innerHTML = '';
-  const label = document.createElement('div');
-  label.className = 'subx-label';
-  label.textContent = '演化链';
-  label.style.color = '#fff';
-  label.style.fontWeight = '700';
-  row.appendChild(label);
-  steps.forEach(s => {
-    const cell = document.createElement('div');
-    cell.className = 'subx-cell active';
-    cell.style.color = '#fff';
-    cell.style.fontWeight = '700';
-    cell.style.fontSize = '12px';
-    cell.innerHTML = `${s.num} ${s.name}`;
-    row.appendChild(cell);
   });
 }
 function renderSubX() {
@@ -1345,7 +1116,7 @@ function renderDeviceSection() {
             <th style="text-align:center;padding:6px;color:#4ade80;">🏠 LG Gram</th>
             <th style="text-align:center;padding:6px;color:#facc15;">✈️ Huawei XPro</th>
           </tr>
-          ${['P01','P02','P03','P04','P05','P06','DEV'].map(pid => {
+          ${['P01','P02','P03','P04','P05'].map(pid => {
             const p = projects.find(pp => pp.id === pid);
             const da = deviceAlloc[pid];
             return `<tr style="border-bottom:1px solid #222;">
@@ -1391,29 +1162,9 @@ function renderDeviceSection() {
     </div>`;
 }
 function renderSidebar() {}
-
-function renderZStats() {
-  const el = document.getElementById('z-stats');
-  if (!el) return;
-  const activeEmps = employees.filter(e => isEmpActive(e, currentProject));
-  let h=0, m=0, s=0;
-  activeEmps.forEach(e => {
-    if (e.z === '人') h++;
-    else if (e.z === '中间') m++;
-    else if (e.z === '系统') s++;
-  });
-  const redFlag = s > h;
-  el.innerHTML = `
-    <span style="color:#666;">z轴 服务对象:</span>
-    <span class="z-count ${redFlag?'warning':'healthy'}">
-      🟢人 ${h} · 🟡中间 ${m} · 🔵系统 ${s}
-      ${redFlag ? ' · ⚠️ 系统>人 触发审计' : ' · ✅ 健康'}
-    </span>`;
-}
 function render() {
-  renderTabs(); renderProjectInfo(); renderX1Header(); renderSubX(); renderSubRole(); renderFlywheel(); renderGrid();
+  renderTabs(); renderProjectInfo(); renderGrid(); renderSubX(); renderSubRole(); renderFlywheel();
   renderAccountSection(); renderDeviceSection(); renderSidebar();
-  renderZStats();
   document.getElementById('model-label').textContent = `平面(X×Y) = 12步演化链 × 6层级 · Z = ${currentProject.name}`;
   document.getElementById('model-label').style.color = currentProject.color;
 }
@@ -1437,8 +1188,7 @@ document.addEventListener('mouseover', e => {
   const jobHtml = jobs.length > 1
     ? `<ul style="margin:4px 0 0 14px;padding:0;list-style:disc;font-size:11px;color:#bbb;line-height:1.6">${jobs.map(j => `<li>${j}</li>`).join('')}</ul>`
     : `<div class="tt-detail">${detail}</div>`;
-  const zLabel = emp.z ? `<div style="font-size:10px;margin-top:4px;"><span class="z-tag z-${emp.z}" style="font-size:9px;padding:1px 6px;">z=${emp.z}</span></div>` : '';
-  tooltip.innerHTML = `<div class="tt-id">${emp.id} ${pl}</div><div class="tt-name">${emp.name}</div><div class="tt-role">${emp.role}</div>${zLabel}${jobHtml}${stHtml}`;
+  tooltip.innerHTML = `<div class="tt-id">${emp.id} ${pl}</div><div class="tt-name">${emp.name}</div><div class="tt-role">${emp.role}</div>${jobHtml}${stHtml}`;
   const r = badge.getBoundingClientRect();
   tooltip.style.left = Math.min(r.left, window.innerWidth - 380) + 'px';
   tooltip.style.top = (r.bottom + 8) + 'px';
@@ -1453,6 +1203,3 @@ document.addEventListener('mouseout', e => { if (!e.target.closest('.badge')) to
 <!-- FDA retry 1776220974 -->
 <!-- post-reboot test 1776222142 -->
 <!-- fda retest 1776222735 -->
-<!-- B2 wrapper test Wed Apr 15 17:58:25 CST 2026 -->
-<!-- D5 failtest Wed Apr 15 17:59:31 CST 2026 -->
-<!-- D5 recovery Wed Apr 15 18:00:27 CST 2026 -->
