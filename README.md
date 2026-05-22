@@ -10,6 +10,6 @@ Zhao-Family-Holdings 组织运营可视化层。
 ## 源头位置
 
 本 repo 是**发布副本**，编辑源头在：
-`Zhao-Family-Holdings/ai-agency-lab/content-flywheel/team-distribution.html`（Google Drive）
+`Zhao-Family-Holdings/05_ai-mcn/team-distribution.html`（Google Drive）
 
 Cowork 每次编辑后会同步 push 到这里。
